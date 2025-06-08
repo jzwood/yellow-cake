@@ -10,16 +10,55 @@ An RPN stack language with manual memory management
 
 #### FUEL
 
-YELLOW CAKE (YC) programs need `FUEL` to run. Every operation decrements the program's `FUEL`, ultimately halting once `FUEL` reaches 0.
+YELLOW CAKE (YC) programs need `FUEL` to run. Every built-in operation decrements the program's `FUEL`, ultimately halting once `FUEL` reaches 0.
 Thus "the end is not the end", `FUEL` depletion is.
 
 #### DATA
 
-YC operates exclusively on 64 bit signed integers which can be pushed onto the stack or written to memory. Memory consists of 3,750 consecutive 64 bit cells.
+YC operates exclusively on 64 bit signed integers which can be pushed onto the stack or written to memory (ie consecutive 64 bit addresses).
 
 #### OPERATORS
 
+YC contains built-in "primitive" operators, standard lib operators which are defined in terms of native operators, and user defined operators. Only evaluating native operators decrements `FUEL`.
+Consider the following operators:
+
+    A B MAX = A A B GT IF B B A GT IF
+
+Parentheses are not part of YC's grammar but if they were they would be grouped like this
+
+    A B MAX = (A (A B GT) IF) (B (B A GT) IF)
+
+When `MAX` is encountered on the top of the stack, `MAX` and the next 2 fully resolved expressions are popped off the stack and replaced with the definition of `MAX`.
+
+```
+| MAX |       | IF  |
+|-----|       |-----|
+| B   |       | GT  |
+|-----|  ==>  |-----|
+| A   |       | A   |
+|-----|       |-----|
+| ... |       | B   |
+              |-----|
+              | B   |
+              |-----|
+              | IF  |
+              |-----|
+              | GT  |
+              |-----|
+              | B   |
+              |-----|
+              | B   |
+              |-----|
+              | A   |
+              |-----|
+              | A   |
+              |-----|
+              | ... |
+```
+
 #### PROGRAM
+
+A Program must start with `<INTEGER> "FUEL"`, followed by any number of user defined operators, and end with a zero parameter `MAIN` operator.
 
 #### COMMENTS
 
@@ -34,9 +73,14 @@ All other characters are considered comments and ignored.
 
 #### GRAMMAR
 
-    <WORD> := { <A-Z> | <0-9> | "_" } ["'" | <0-9>]
-    <INT>  := { <0-9> }
-    <OP>   := { <WORD> } <WORD> "=" { <INT> | <OP> } <EOL>
+    <WORD>    := { <A-Z> | <0-9> | "_" } ["'" | <0-9>]
+    <INT>     := { <0-9> }
+    <PARAM>   := <WORD>
+    <OPNAME>  := <WORD>
+    <OPBODY>  := { <INT> | <OPNAME> } <EOL>
+    <OP>      := { <PARAM> } <OPNAME> "=" <OPBODY>
+    <MAIN>    := "MAIN =" <OPBODY>
+    <PROGRAM> := <INTEGER> "FUEL" { <OP> } <MAIN>
 
 #### BUILT-INS
     A B PLUS  = _
@@ -67,17 +111,17 @@ All other characters are considered comments and ignored.
       A  NOT   = A A NAND
       A  NEG   = 0 A -
     P P' CP    = P' P READ WRITE
+    A B  IF    = A [ B FALSE ]
 
 ### EXAMPLES
-      A  DUP     = A A
-    A N  REPLICATE = N [ N N 1 - ]
-    A B  DUP2    = A B A B
-    P P' MEMSWAP = (P READ) (P (P' READ) WRITE) P' WRITE
-    I W  REVERSE = I (I W +) W 1 GT [MEMSWAP (I 1 -) (W 2 -) DUP2 GT]
-    P N PRINT'   = P N [ DUP PRINT 1 - ]
-      A INCR     = A 1 +
-      A NOT      = A A A + =
-    A B PUSH_IF  = A [ B FALSE ]
-    A B DIVISIBLE = A B REM 0 EQ
-    N F B FB FIZZ_OR_BUZZ = FB 35 NEG PUSH_IF B NOT F AND 3 NEG PUSH_IF F NOT B AND 5 NEG PUSH_IF NOT B
-    P N FIZZBUZZ = 1 N [ 5 REPLICATE 3 DIVISIBLE SWP 5 DIVISIBLE DUP2 AND FIZZ_OR_BUZZ WRITE 1 - ]
+      A  DUP        = A A
+    A N  REPLICATE  = N [ N N 1 - ]
+    A B  DUP2       = A B A B
+    P P' MEMSWAP    = (P READ) (P (P' READ) WRITE) P' WRITE
+    I W  REVERSE    = I (I W +) W 1 GT [MEMSWAP (I 1 -) (W 2 -) DUP2 GT]
+    P N PRINT'      = P N [ DUP PRINT 1 - ]
+    P N WRITE'      = P N [ DUP PRINT 1 - ]
+      A INCR        = A 1 +
+    A B DIVISIBLE   = A B REM 0 EQ
+    N F B FB F_OR_B = FB 35 NEG IF B NOT F AND 3 NEG IF F NOT B AND 5 NEG IF NOT B
+    P N FIZZBUZZ    = 1 N [ 5 REPLICATE 3 DIVISIBLE SWP 5 DIVISIBLE DUP2 AND F_OR_B WRITE 1 - ]
