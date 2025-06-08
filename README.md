@@ -34,10 +34,9 @@ All other characters are considered comments and ignored.
 
 #### GRAMMAR
 
-    <WORD> := { <A-Z> | "_" } "'"
-    <INT> := { <0-9> }
-    <OP> := { <WORD> } <WORD> "=" { <INT> | <OP> } <EOL>
-
+    <WORD> := { <A-Z> | <0-9> | "_" } ["'" | <0-9>]
+    <INT>  := { <0-9> }
+    <OP>   := { <WORD> } <WORD> "=" { <INT> | <OP> } <EOL>
 
 #### BUILT-INS
     A B PLUS  = _
@@ -51,8 +50,8 @@ All other characters are considered comments and ignored.
     A B NAND  = _
       P READ  = _
     P X WRITE =
-      B [     =
-      B ]     =
+      A [     =
+      A ]     =
     P PRINT   =
 
 #### STD LIB
@@ -66,22 +65,19 @@ All other characters are considered comments and ignored.
     A B  OR    = (A A NAND) (B B NAND) NAND
     A B  NOR   = A B OR NOT
       A  NOT   = A A NAND
+      A  NEG   = 0 A -
     P P' CP    = P' P READ WRITE
 
 ### EXAMPLES
-      A  TRIP    = A A A
-    A B  TRIP2   = A B A B A B
+      A  DUP     = A A
+    A N  REPLICATE = N [ N N 1 - ]
     A B  DUP2    = A B A B
     P P' MEMSWAP = (P READ) (P (P' READ) WRITE) P' WRITE
     I W  REVERSE = I (I W +) W 1 GT [MEMSWAP (I 1 -) (W 2 -) DUP2 GT]
-
     P N PRINT'   = P N [ DUP PRINT 1 - ]
       A INCR     = A 1 +
       A NOT      = A A A + =
-    N F B FB FBZ = FB [ 35 FALSE ] B NOT F AND [ 3 FALSE ] F NOT B AND [ 5 FALSE ] NOT B NOT F OR [ N FALSE ]
-    P N FIZZBUZZ = 1 N [   ]
-      N FIZZBUZZ = 1 N [ TRIP 3 REM SWP 5 REM TRIP2 ]
-
-      [3, 3 % 3, 3 % 5]
-      [3, 1, 0, 1, 0, 1, 0]
-      [3, 0, 1, 0]
+    A B PUSH_IF  = A [ B FALSE ]
+    A B DIVISIBLE = A B REM 0 EQ
+    N F B FB FIZZ_OR_BUZZ = FB 35 NEG PUSH_IF B NOT F AND 3 NEG PUSH_IF F NOT B AND 5 NEG PUSH_IF NOT B
+    P N FIZZBUZZ = 1 N [ 5 REPLICATE 3 DIVISIBLE SWP 5 DIVISIBLE DUP2 AND FIZZ_OR_BUZZ WRITE 1 - ]
