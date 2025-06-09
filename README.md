@@ -1,8 +1,7 @@
-<p align="center">
+<div align="center">
   <img src="./logo.svg" width="100"/>
-</p>
-
-# YELLOW CAKE
+  <h1>YELLOW CAKE</h1>
+</div>
 
 An reverse polish notation stack language with manual memory management
 
