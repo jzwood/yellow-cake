@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./logo.svg" width="150"/>
+</p>
+
 # YELLOW CAKE
 
 An reverse polish notation stack language with manual memory management
