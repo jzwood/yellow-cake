@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./logo.svg" width="150"/>
+  <img src="./logo.svg" width="100"/>
 </p>
 
 # YELLOW CAKE
