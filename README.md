@@ -86,7 +86,6 @@ All other characters are considered comments and ignored (see grammar).
     A B MULT  = _
     A B SUB   = _
     A B DIV   = _ _
-    A B REM   = _
     A B GT    = _
     A B LT    = _
     A B EQ    = _
@@ -114,12 +113,11 @@ All other characters are considered comments and ignored (see grammar).
     A B  IF    = A [ B FALSE ]
       A  INCR  = A 1 +
       A  DECR  = A 1 -
+    A N  REPLICATE  = N [ N N DECR ]
     P I E IF_ELSE = P I IF P NOT E IF
 
 ### EXAMPLES
 
-      A  DUP        = A A
-    A N  REPLICATE  = N [ N N DECR ]
     A B  DUP2       = A B A B
     P P' MEMSWAP    = (P READ) (P (P' READ) WRITE) P' WRITE
     I W  REVERSE    = I (I W +) W 1 GT [MEMSWAP (I DECR) (W 2 -) DUP2 GT]
