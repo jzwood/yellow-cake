@@ -85,9 +85,9 @@ All other characters are considered comments and ignored (see grammar).
 
 #### BUILT-INS
 
-    A B PLUS  = _
-    A B MULT  = _
-    A B SUB   = _
+    A B +     = _
+    A B *     = _
+    A B -     = _
     A B DIV   = _ _
     A B GT    = _
     A B LT    = _

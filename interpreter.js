@@ -1,8 +1,33 @@
-const PLUS = (stack, a, b) => stack.push(a + b);
-const MULT = (stack, a, b) => stack.push(a * b);
-const SUB = (stack, a, b) => stack.push(a - b);
-const DIV = (stack, a, b) => stack.push(Math.floor(a / b), a % b)
-const PRINT = (stack, a) => console.log(a)
+const PLUS = ({ stack }, a, b) => stack.push(a + b);
+const MULT = ({ stack }, a, b) => stack.push(a * b);
+const SUB = ({ stack }, a, b) => stack.push(a - b);
+const DIV = ({ stack }, a, b) => stack.push(Math.floor(a / b), a % b);
+const PRINT = ({ stack }, a) => console.log(a);
+const LEFT_BRACKET = (env, a) => {
+  env.p++
+  if (a === 0) {
+    env.p = program.indexOf(']', env.p)
+  }
+}
+
+const DUP = (env, a) => run({...env, program: [a, a], pointer: 0})
+const NEG = (env, a) =>
+      A  NEG   = 0 A -
+
+const BUILT_INS = {
+  '+': PLUS,
+  '*': MULT,
+  [DIV.name]: DIV,
+  '[': LEFT_BRACKET,
+}
+
+const STD_LIB = {
+  [DUP.name]: DUP
+}
+
+
+//A  DUP   = A A
+//A B  SWAP  = B A
 
 //A B DIV   = _ _
 //A B GT    = _
@@ -14,17 +39,10 @@ const PRINT = (stack, a) => console.log(a)
 //A [     =
 //A ]     =
 //P PRINT   =
+//A [     =
+//A ]     =
 
-const PROGRAM = [
-  9,
-  1,
-  2,
-  3,
-  4,
-  PRINT,
-  PRINT,
-  PRINT
-];
+const PROGRAM = [9, 1, 2, 3, 4, PLUS, MULT, PLUS];
 
 console.log(run(PROGRAM));
 
@@ -33,35 +51,49 @@ function panic(err) {
   throw new Error(msg);
 }
 
-function run(program) {
-  const stack = [];
-  let pointer = 0;
-  const eop = program.length;
-  while (pointer < eop) {
-    const instruction = program.at(pointer++);
+var line = "    P N FIZZBUZZ    = 1 N [ 5 REPLICATE 3 DIVISIBLE SWP 5 DIVISIBLE DUP2 AND F_OR_B WRITE DECR ]"
+function parseLine(line) {
+  const tokens = line.matchAll(/[A-Z0-9_=\[\]\']+/g).map(([name]) => name).toArray()
+  const eq = tokens.indexOf('=')
+  const name = tokens.at(eq - 1)
+  const args = tokens.slice(0, eq - 1)
+  const program = tokens.slice(eq + 1)
+  return { args, name, program}
+}
+
+function run({program, stack, memory, pointer}) {
+  const env = {
+    program,
+    stack: [],
+    memory: [],
+    pointer: 0,
+    eop: program.length,
+  };
+  while (env.pointer < env.eop) {
+    const instruction = program.at(env.pointer++);
     switch (typeof instruction) {
       case "number":
-        stack.push(instruction);
+        env.stack.push(instruction);
         break;
       case "function":
-        reduce(stack, instruction);
+        reduce(env, instruction);
         break;
       default:
         panic(`Unrecognized instruction: ${instruction}`);
     }
   }
-  return stack;
+  return env
 }
 
-function reduce(stack, operator) {
+function reduce(env, operator) {
   const arity = operator.length - 1;
-  if (stack.length < arity) {
+  if (env.stack.length < arity) {
     panic(
       `Not enough values in stack ${
-        JSON.stringify(stack)
-      } for operator ${operator}.`,
+        JSON.stringify(env.stack)
+      } for operator ${operator.name}.`,
     );
   }
-  const args = stack.splice(-arity);
-  operator(stack, ...args);
+  const args = env.stack.splice(-arity);
+  operator(env, ...args);
 }
