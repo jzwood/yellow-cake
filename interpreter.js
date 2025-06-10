@@ -57,11 +57,16 @@ function parseLine(line) {
   const eq = tokens.indexOf('=')
   const name = tokens.at(eq - 1)
   const args = tokens.slice(0, eq - 1)
-  const program = tokens.slice(eq + 1)
+  const program = tokens.slice(eq + 1).map((token) => /^\d+$/.test(token) ? parseInt(token) : token)
   return { args, name, program}
 }
 
-function run({program, stack, memory, pointer}) {
+function rewrite({args, stack, program}) {
+  const transformToken = args.reduce((acc, arg, index) => Object.assign(acc, {[arg]: stack.at(index - args.length)}), {})
+  return program.map((token) => transformToken[token] ?? token)
+}
+
+function run({program, functions, stack, memory}) {
   const env = {
     program,
     stack: [],
