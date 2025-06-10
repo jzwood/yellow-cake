@@ -19,8 +19,8 @@ decrements the program's `FUEL`, ultimately halting once `FUEL` reaches 0. Thus
 
 #### DATA
 
-YC operates exclusively on 64 bit signed integers which can be pushed onto the
-stack or written to memory (ie consecutive 64 bit addresses).
+YC operates exclusively on 64-bit signed integers which can be pushed onto the
+stack or written to memory (ie consecutive 64-bit addresses).
 
 #### OPERATORS
 
