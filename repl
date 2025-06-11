@@ -1,0 +1,3 @@
+#!/bin/bash
+
+deno repl --allow-read --eval-file=index.js
