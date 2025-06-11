@@ -1,30 +1,34 @@
 import { BUILT_INS } from "./core.js";
 import { panic } from "./utils.js";
 
-export function evaluate({ name, functions, stack, memory }) {
-  panic(name in functions === false, `unknown function ${name} not found`);
-  const { args, subroutine } = functions[name];
+export function evaluate({ funcMap, subroutine, stack, memory }) {
+  //panic(name in functions === false, `unknown function ${name} not found`);
+  //const { args, subroutine } = functions[name];
+  const eop = subroutine.length;
   const env = {
-    subroutine,
-    stack: [],
-    memory: [],
     pointer: 0,
-    eop: subroutine.length,
+    stack,
+    memory,
   };
-  while (env.pointer < env.eop) {
+  while (env.pointer < eop) {
     const instruction = subroutine.at(env.pointer++);
-    switch (typeof instruction) {
-      case "number":
-        env.stack.push(instruction);
-        break;
-      case "function":
-        reduce(env, instruction);
-        break;
-      default:
-        panic(true, `Unrecognized instruction: ${instruction}`);
+    console.log(instruction, stack)
+    if (typeof instruction === "number") {
+      env.stack.push(instruction);
+    } else if (instruction in BUILT_INS) {
+      reduce(env, BUILT_INS[instruction]);
+    } else if (instruction in funcMap) {
+      const { args, subroutine } = funcMap[instruction];
+      evaluate({
+        funcMap,
+        subroutine: substitueArgs({ args, stack, subroutine }),
+        stack,
+        memory,
+      });
+    } else {
+      panic(true, `Unrecognized instruction: ${instruction}`);
     }
   }
-  return env;
 }
 
 function reduce(env, operator) {
@@ -39,7 +43,7 @@ function reduce(env, operator) {
   operator(env, ...args);
 }
 
-function rewrite({ args, stack, subroutine }) {
+function substitueArgs({ args, stack, subroutine }) {
   const transformToken = args.reduce(
     (acc, arg, index) =>
       Object.assign(acc, { [arg]: stack.at(index - args.length) }),

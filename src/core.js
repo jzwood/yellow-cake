@@ -30,9 +30,6 @@ const RIGHT_BRACKET = (env, a) => {
   }
 };
 
-//const DUP = (env, a) => run({...env, subroutine: [a, a], pointer: 0})
-//const NEG = (env, a) => run({...env, subroutine: [0, a], pointer: 0})
-
 export const BUILT_INS = {
   "+": PLUS,
   "-": SUB,
@@ -48,7 +45,3 @@ export const BUILT_INS = {
   "[": LEFT_BRACKET,
   "]": RIGHT_BRACKET,
 };
-
-//const PROGRAM = [9, 1, 2, 3, 4, PLUS, MULT, PLUS];
-
-//console.log(run(PROGRAM));
