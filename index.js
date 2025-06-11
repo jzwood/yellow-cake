@@ -19,6 +19,6 @@ const { subroutine } = funcMap["MAIN"];
 const stack = [];
 const memory = [];
 
-const args = {funcMap, subroutine, stack, memory}
-evaluate(args)
-console.log(args)
+const args = { funcMap, subroutine, stack, memory };
+evaluate(args);
+console.log(args);
