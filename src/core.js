@@ -1,11 +1,22 @@
+import { panic } from "./utils.js";
+
 const PLUS = ({ stack }, a, b) => stack.push(a + b);
-const MULT = ({ stack }, a, b) => stack.push(a * b);
+const X = ({ stack }, a, b) => stack.push(a * b);
 const SUB = ({ stack }, a, b) => stack.push(a - b);
 const DIV = ({ stack }, a, b) => stack.push(Math.floor(a / b), a % b);
+const GT = ({ stack }, a, b) => stack.push(a > b);
+const LT = ({ stack }, a, b) => stack.push(a < b);
+const EQ = ({ stack }, a, b) => stack.push(a === b);
+const NAND = ({ stack }, a, b) => stack.push(+!(!!a && !!b));
+const READ = ({ memory }, p) => memory.at(p);
+const WRITE = ({ memory }, p, x) => {
+  memory[p] = x;
+};
 const PRINT = ({ stack }, a) => console.log(a);
 const LEFT_BRACKET = (env, a) => {
   if (a === 0) {
     env.pointer = env.subroutine.indexOf("]", env.pointer);
+    panic(env.pointer < 0, "matching ] not found");
   } else {
     env.pointer += 1;
   }
@@ -15,6 +26,7 @@ const RIGHT_BRACKET = (env, a) => {
     env.pointer += 1;
   } else {
     env.pointer = env.subroutine.lastIndexOf("[", env.pointer);
+    panic(env.pointer < 0, "matching [ not found]");
   }
 };
 
@@ -23,28 +35,19 @@ const RIGHT_BRACKET = (env, a) => {
 
 export const BUILT_INS = {
   "+": PLUS,
-  "*": MULT,
+  "-": SUB,
+  [X.name]: X,
   [DIV.name]: DIV,
+  [GT.name]: GT,
+  [LT.name]: LT,
+  [EQ.name]: EQ,
+  [NAND.name]: NAND,
+  [READ.name]: READ,
+  [WRITE.name]: WRITE,
+  [PRINT.name]: PRINT,
   "[": LEFT_BRACKET,
   "]": RIGHT_BRACKET,
-  [PRINT.name]: PRINT,
 };
-
-//A  DUP   = A A
-//A B  SWAP  = B A
-
-//A B DIV   = _ _
-//A B GT    = _
-//A B LT    = _
-//A B EQ    = _
-//A B NAND  = _
-//P READ  = _
-//P X WRITE =
-//A [     =
-//A ]     =
-//P PRINT   =
-//A [     =
-//A ]     =
 
 //const PROGRAM = [9, 1, 2, 3, 4, PLUS, MULT, PLUS];
 

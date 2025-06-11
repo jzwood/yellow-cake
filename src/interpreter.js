@@ -1,6 +1,9 @@
 import { BUILT_INS } from "./core.js";
+import { panic } from "./utils.js";
 
 export function evaluate({ name, functions, stack, memory }) {
+  panic(name in functions === false, `unknown function ${name} not found`);
+  const { args, subroutine } = functions[name];
   const env = {
     subroutine,
     stack: [],
@@ -18,7 +21,7 @@ export function evaluate({ name, functions, stack, memory }) {
         reduce(env, instruction);
         break;
       default:
-        panic(`Unrecognized instruction: ${instruction}`);
+        panic(true, `Unrecognized instruction: ${instruction}`);
     }
   }
   return env;
@@ -26,13 +29,12 @@ export function evaluate({ name, functions, stack, memory }) {
 
 function reduce(env, operator) {
   const arity = operator.length - 1;
-  if (env.stack.length < arity) {
-    panic(
-      `Not enough values in stack ${
-        JSON.stringify(env.stack)
-      } for operator ${operator.name}.`,
-    );
-  }
+  panic(
+    env.stack.length < arity,
+    `Not enough values in stack ${
+      JSON.stringify(env.stack)
+    } for operator ${operator.name}.`,
+  );
   const args = env.stack.splice(-arity);
   operator(env, ...args);
 }

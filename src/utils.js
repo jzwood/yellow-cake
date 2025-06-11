@@ -9,7 +9,9 @@ export function toDictOn(arr, key) {
   }, {});
 }
 
-export function panic(err) {
-  const msg = typeof err === "object" ? JSON.stringify(err) : err.toString();
-  throw new Error(msg);
+export function panic(predicate, err) {
+  if (predicate) {
+    const msg = typeof err === "object" ? JSON.stringify(err) : err.toString();
+    throw new Error(msg);
+  }
 }
