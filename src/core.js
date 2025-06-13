@@ -22,6 +22,7 @@ const LEFT_BRACKET = (env, a) => {
   }
 };
 const RIGHT_BRACKET = (env, a) => {
+  console.log(env, "RIGHT BRACKET")
   if (a === 0) {
     env.pointer += 1;
   } else {

@@ -8,6 +8,7 @@ export function evaluate({ funcMap, subroutine, stack, memory }) {
   const env = {
     pointer: 0,
     stack,
+    subroutine,
     memory,
   };
   while (env.pointer < eop) {
