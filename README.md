@@ -116,7 +116,7 @@ All other characters are considered comments and ignored (see grammar).
     A B  IF    = A [ B FALSE ]
       A  INCR  = A 1 +
       A  DECR  = A 1 -
-    A N  REPLICATE  = N [ N N DECR ]
+    A N  REPLICATE  = N [ A N DECR ]
     P I E IF_ELSE = P I IF P NOT E IF
 
 ### EXAMPLES

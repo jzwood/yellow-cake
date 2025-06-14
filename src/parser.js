@@ -5,7 +5,7 @@
 import { toDictOn } from "./utils.js";
 
 function parseLine(line) {
-  const tokens = line.matchAll(/[A-Z0-9_=\[\]\']+/g).map(([name]) => name)
+  const tokens = line.matchAll(/[A-Z0-9_+-=\[\]\']+/g).map(([name]) => name)
     .toArray();
   const eq = tokens.indexOf("=");
   const name = tokens.at(eq - 1);

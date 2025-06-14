@@ -13,7 +13,7 @@ export function evaluate({ funcMap, subroutine, stack, memory }) {
   };
   while (env.pointer < eop) {
     const instruction = subroutine.at(env.pointer);
-    console.log({ instruction, stack, subroutine, pointer: env.pointer - 1 });
+    console.log({ instruction, stack, subroutine, pointer: env.pointer });
     if (typeof instruction === "number") {
       env.stack.push(instruction);
     } else if (instruction in BUILT_INS) {

@@ -12,11 +12,11 @@ A DUP = A A
 A B SWAP  = B A
 A INCR = A 1 +
 A DECR = A 1 -
-A N REPLICATE  = N [ N N DECR ]
+A N REPLICATE = N N [ A SWAP DECR DUP ] [ FALSE ]
 P B IF = P [ B 0 ]
 P I E IF_ELSE = P I IF P NOT E IF
 
-MAIN = 0 5 IF 99`;
+MAIN = 5 3 REPLICATE`;
 
 const funcMap = parse(PROGRAM);
 const { subroutine } = funcMap["MAIN"];
