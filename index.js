@@ -16,7 +16,7 @@ A N REPLICATE  = N [ N N DECR ]
 P B IF = P [ B 0 ]
 P I E IF_ELSE = P I IF P NOT E IF
 
-MAIN = 1 5 IF`;
+MAIN = 0 5 IF 99`;
 
 const funcMap = parse(PROGRAM);
 const { subroutine } = funcMap["MAIN"];

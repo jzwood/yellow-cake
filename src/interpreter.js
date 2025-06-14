@@ -12,7 +12,7 @@ export function evaluate({ funcMap, subroutine, stack, memory }) {
     memory,
   };
   while (env.pointer < eop) {
-    const instruction = subroutine.at(env.pointer++);
+    const instruction = subroutine.at(env.pointer);
     console.log({ instruction, stack, subroutine, pointer: env.pointer - 1 });
     if (typeof instruction === "number") {
       env.stack.push(instruction);
@@ -29,6 +29,7 @@ export function evaluate({ funcMap, subroutine, stack, memory }) {
     } else {
       panic(true, `Unrecognized instruction: ${instruction}`);
     }
+    env.pointer++;
     console.log("END", { instruction, stack });
     console.log("---------------------------");
   }

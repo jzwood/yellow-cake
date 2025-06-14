@@ -17,14 +17,10 @@ const LEFT_BRACKET = (env, a) => {
   if (a === 0) {
     env.pointer = env.subroutine.indexOf("]", env.pointer);
     panic(env.pointer < 0, "matching ] not found");
-  } else {
-    //env.pointer += 1;
   }
 };
 const RIGHT_BRACKET = (env, a) => {
-  if (a === 0) {
-    //env.pointer += 1;
-  } else {
+  if (a !== 0) {
     env.pointer = env.subroutine.lastIndexOf("[", env.pointer); // + 1;
     panic(env.pointer === 0, "matching [ not found]");
   }
