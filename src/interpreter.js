@@ -1,6 +1,12 @@
 import { BUILT_INS } from "./core.js";
 import { panic } from "./utils.js";
 
+const DEBUG = false
+
+function debug(...args) {
+  if (DEBUG) console.log(...args)
+}
+
 export function evaluate({ funcMap, subroutine, stack, memory }) {
   //panic(name in functions === false, `unknown function ${name} not found`);
   //const { args, subroutine } = functions[name];
@@ -13,7 +19,7 @@ export function evaluate({ funcMap, subroutine, stack, memory }) {
   };
   while (env.pointer < eop) {
     const instruction = subroutine.at(env.pointer);
-    console.log({ instruction, stack, subroutine, pointer: env.pointer });
+    debug({ instruction, stack, subroutine, pointer: env.pointer });
     if (typeof instruction === "number") {
       env.stack.push(instruction);
     } else if (instruction in BUILT_INS) {
@@ -30,8 +36,8 @@ export function evaluate({ funcMap, subroutine, stack, memory }) {
       panic(true, `Unrecognized instruction: ${instruction}`);
     }
     env.pointer++;
-    console.log("END", { instruction, stack });
-    console.log("---------------------------");
+    debug("END", { instruction, stack });
+    debug("---------------------------");
   }
 }
 
