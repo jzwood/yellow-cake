@@ -8,6 +8,7 @@ import { evaluate } from "./src/interpreter.js";
 const PROGRAM = `
 T = 1
 F = 0
+A DROP =
 A DECR = A 1 -
 A INCR = A 1 +
 A B SWAP = B A
@@ -15,7 +16,7 @@ A B AND = (A B NAND) (A B NAND) NAND
 A B OR = (A A NAND) (B B NAND) NAND
 A B NOR = A B OR NOT
 A NOT = A A NAND
-A B REM = A B DIV SWAP [ 0 ]
+A B REM = A B DIV SWAP DROP
 A DUP = A A
 A B DUP2 = A B A B
 P B IF = P [ B 0 ]
