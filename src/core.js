@@ -18,16 +18,15 @@ const LEFT_BRACKET = (env, a) => {
     env.pointer = env.subroutine.indexOf("]", env.pointer);
     panic(env.pointer < 0, "matching ] not found");
   } else {
-    env.pointer += 1;
+    //env.pointer += 1;
   }
 };
 const RIGHT_BRACKET = (env, a) => {
-  console.log(env, "RIGHT BRACKET")
   if (a === 0) {
-    env.pointer += 1;
+    //env.pointer += 1;
   } else {
-    env.pointer = env.subroutine.lastIndexOf("[", env.pointer);
-    panic(env.pointer < 0, "matching [ not found]");
+    env.pointer = env.subroutine.lastIndexOf("[", env.pointer); // + 1;
+    panic(env.pointer === 0, "matching [ not found]");
   }
 };
 

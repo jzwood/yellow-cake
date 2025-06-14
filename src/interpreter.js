@@ -13,7 +13,7 @@ export function evaluate({ funcMap, subroutine, stack, memory }) {
   };
   while (env.pointer < eop) {
     const instruction = subroutine.at(env.pointer++);
-    console.log(instruction, stack, " -- " , subroutine,  `[${env.pointer - 1}]`)
+    console.log({ instruction, stack, subroutine, pointer: env.pointer - 1 });
     if (typeof instruction === "number") {
       env.stack.push(instruction);
     } else if (instruction in BUILT_INS) {
@@ -29,13 +29,13 @@ export function evaluate({ funcMap, subroutine, stack, memory }) {
     } else {
       panic(true, `Unrecognized instruction: ${instruction}`);
     }
-    console.log(instruction, stack)
-    console.log("---------------------------")
+    console.log("END", { instruction, stack });
+    console.log("---------------------------");
   }
 }
 
 function popStack(stack, n) {
-  return stack.splice(-n);
+  return n === 0 ? [] : stack.splice(-n);
 }
 
 function reduce(env, operator) {
@@ -46,7 +46,7 @@ function reduce(env, operator) {
       JSON.stringify(env.stack)
     } for operator ${operator.name}.`,
   );
-  const args = popStack(env.stack, arity)
+  const args = popStack(env.stack, arity);
   operator(env, ...args);
 }
 
@@ -56,7 +56,7 @@ function substitueArgs({ args, stack, subroutine }) {
       Object.assign(acc, { [arg]: stack.at(index - args.length) }),
     {},
   );
-  popStack(stack, args.length)
+  popStack(stack, args.length);
   // in addition to subsituting args we need to remove args from the top of stack.
   // TODO reconcile reduce and substitueArgs -- probably rename substitueArgs
   return subroutine.map((token) => transformToken[token] ?? token);

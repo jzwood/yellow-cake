@@ -8,14 +8,15 @@ import { evaluate } from "./src/interpreter.js";
 const PROGRAM = `
 FALSE = 0
 TRUE  = 1
-A  DUP   = A A
-A B  SWAP  = B A
-A  INCR  = A 1 +
-A  DECR  = A 1 -
-A N  REPLICATE  = N [ N N DECR ]
+A DUP = A A
+A B SWAP  = B A
+A INCR = A 1 +
+A DECR = A 1 -
+A N REPLICATE  = N [ N N DECR ]
+P B IF = P [ B 0 ]
+P I E IF_ELSE = P I IF P NOT E IF
 
-MAIN = 7 10 REPLICATE
-`;
+MAIN = 1 5 IF`;
 
 const funcMap = parse(PROGRAM);
 const { subroutine } = funcMap["MAIN"];
