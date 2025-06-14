@@ -1,0 +1,4 @@
+- make sure all example programs are correct
+- implement fuel
+- implement findBalancedRightBracket and findBalancedLeftBracket
+- update docs

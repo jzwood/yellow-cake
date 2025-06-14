@@ -8,8 +8,6 @@ function debug(...args) {
 }
 
 export function evaluate({ funcMap, subroutine, stack, memory }) {
-  //panic(name in functions === false, `unknown function ${name} not found`);
-  //const { args, subroutine } = functions[name];
   const eop = subroutine.length;
   const env = {
     pointer: 0,
