@@ -1,3 +1,2 @@
-- make sure all example programs are correct
 - implement fuel
 - update docs
