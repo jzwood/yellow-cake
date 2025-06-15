@@ -1,4 +1,4 @@
-import { panic } from "./utils.js";
+import { findBracket, panic } from "./utils.js";
 
 const PLUS = ({ stack }, a, b) => stack.push(a + b);
 const X = ({ stack }, a, b) => stack.push(a * b);
@@ -15,14 +15,12 @@ const WRITE = ({ memory }, p, x) => {
 const PRINT = ({ stack }, a) => console.log(a);
 const LEFT_BRACKET = (env, a) => {
   if (a === 0) {
-    env.pointer = env.subroutine.indexOf("]", env.pointer);
-    panic(env.pointer < 0, "matching ] not found");
+    env.pointer = findBracket(env.subroutine, { pointer: env.pointer, bracket: "]" });
   }
 };
 const RIGHT_BRACKET = (env, a) => {
   if (a !== 0) {
-    env.pointer = env.subroutine.lastIndexOf("[", env.pointer); // + 1;
-    panic(env.pointer === 0, "matching [ not found]");
+    env.pointer = findBracket(env.subroutine, { pointer: env.pointer, bracket: "[" });
   }
 };
 

@@ -16,10 +16,9 @@ export function panic(predicate, err) {
   }
 }
 
-//export function findBalancedBracket({type, subroutine, })
-
-export function findBracket(arr, bracket, pointer, step, err) {
-  const balance = 0;
+export function findBracket(arr, { pointer, bracket }) {
+  const step = bracket === "]" ? +1 : -1;
+  let balance = 0;
   const coalgebra = (cell) => {
     switch (cell) {
       case "]":
@@ -31,15 +30,21 @@ export function findBracket(arr, bracket, pointer, step, err) {
       default:
         break;
     }
-    return cell === bracket && data.balance === 0
+    return cell === bracket && balance === 0;
   };
 
-  return pointerWalk({arr, pointer, step, coalgebra, err: "Brackets are not balanced"});
+  return scan({
+    arr,
+    pointer,
+    step,
+    coalgebra,
+    err: `index out of bounds scanning for "${bracket}"`,
+  });
 }
 
-export function pointerWalk({ arr, pointer, step, err, coalgebra }) {
+export function scan({ arr, pointer, coalgebra, step, err }) {
   while (true) {
-    if (pointer < 0 || pointer >= arr.length) panic(true, err);
+    panic(pointer < 0 || pointer >= arr.length, err);
 
     const cell = arr[pointer];
 
@@ -49,26 +54,5 @@ export function pointerWalk({ arr, pointer, step, err, coalgebra }) {
 
     pointer += step;
   }
-  return pointer
+  return pointer;
 }
-
-//export function indexOfBalancedRightBracket(env) {
-
-////env.subroutine.reduce(({index, count}, instruction) => , {index: })
-
-//let balance = 0
-//let index = env.pointer
-//for (let i=env.pointer, i++, i < env.subroutine.) {
-
-//}
-//while (index++) {
-//let instruction = env.subroutine[index]
-//panic(env.pointer < 0, "matching ] not found");
-//}
-
-//subroutine[index] === ']'
-
-//if (subroutine[index] === )
-//env.pointer = env.subroutine.indexOf("]", env.pointer);
-//}
-//export function findBalancedLeftBracket() {}
