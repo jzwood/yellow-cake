@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./logo.svg" width="100"/>
+  <img src="./logo.svg" width="150"/>
   <h1>YELLOW CAKE</h1>
 </div>
 
@@ -93,39 +93,45 @@ All other characters are considered comments and ignored (see grammar).
     A B LT    = _
     A B EQ    = _
     A B NAND  = _
-      P READ  = _
+    P   READ  = _
     P X WRITE =
-      A [     =
-      A ]     =
-    P PRINT   =
+    A   [     =
+    A   ]     =
+    P   PRINT =
 
 #### STD LIB
 
-         FALSE = 0
-         TRUE  = 1
-      A  DUP   = A A
-    A B  SWAP  = B A
-      A  DROP  = [FALSE]
-    A B  REM   = A B DIV SWAP DROP
-    A B  AND   = (A B NAND) (A B NAND) NAND
-    A B  OR    = (A A NAND) (B B NAND) NAND
-    A B  NOR   = A B OR NOT
-      A  NOT   = A A NAND
-      A  NEG   = 0 A -
+        T         = 1
+        F         = 0
+    A   DROP      =
+    A   DECR      = A 1 -
+    A   INCR      = A 1 +
+    A B SWAP      = B A
+    A B AND       = (A B NAND) (A B NAND) NAND
+    A B OR        = (A A NAND) (B B NAND) NAND
+    A B NOR       = A B OR NOT
+    A   NOT       = A A NAND
+    A B NOR       = A B OR NOT
+    A B REM       = A B DIV SWAP DROP
+    A   DUP       = A A
+    P B IF        = P [ B 0 ]
+    A   NEG       = 0 A -
+    A B DIVISIBLE = A B REM 0 EQ
+    A N REPLICATE = N N [ A SWAP DECR DUP ] [ F ]
+
+#### UNTESTED EXAMPLES
+
     P P' CP    = P' P READ WRITE
-    A B  IF    = A [ B FALSE ]
-      A  INCR  = A 1 +
-      A  DECR  = A 1 -
-    A N  REPLICATE  = N [ A N DECR ]
-    P I E IF_ELSE = P I IF P NOT E IF
-
-### EXAMPLES
-
     A B  DUP2       = A B A B
     P P' MEMSWAP    = (P READ) (P (P' READ) WRITE) P' WRITE
     I W  REVERSE    = I (I W +) W 1 GT [MEMSWAP (I DECR) (W 2 -) DUP2 GT]
-    P N PRINT'      = P N [ DUP PRINT DECR ]
-    P N WRITE'      = P N [ DUP PRINT DECR ]
-    A B DIVISIBLE   = A B REM 0 EQ
-    N F B FB F_OR_B = FB 35 NEG IF B NOT F AND 3 NEG IF F NOT B AND 5 NEG IF NOT B
-    P N FIZZBUZZ    = 1 N [ 5 REPLICATE 3 DIVISIBLE SWP 5 DIVISIBLE DUP2 AND F_OR_B WRITE DECR ]
+    P N  PRINT'     = P N [ DUP PRINT DECR ]
+    P N  WRITE'     = P N [ DUP PRINT DECR ]
+
+#### TESTED EXAMPLES
+
+    N IS_FIZZ      = N 3 DIVISIBLE
+    N IS_BUZZ      = N 5 DIVISIBLE
+    N FIZZ_OR_BUZZ = ((N IS_FIZZ N IS_BUZZ AND) (35 NEG) IF) ((N IS_FIZZ (N IS_BUZZ NOT) AND) (3 NEG) IF) (((N IS_FIZZ NOT) N IS_BUZZ AND) (5 NEG) IF) ((N IS_FIZZ NOT N IS_BUZZ NOT AND) N IF)
+
+    N FIZZBUZZ     = 1 N [ DUP FIZZ_OR_BUZZ SWAP INCR DUP N LT ]

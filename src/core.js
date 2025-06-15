@@ -15,12 +15,18 @@ const WRITE = ({ memory }, p, x) => {
 const PRINT = ({ stack }, a) => console.log(a);
 const LEFT_BRACKET = (env, a) => {
   if (a === 0) {
-    env.pointer = findBracket(env.subroutine, { pointer: env.pointer, bracket: "]" });
+    env.pointer = findBracket(env.subroutine, {
+      pointer: env.pointer,
+      bracket: "]",
+    });
   }
 };
 const RIGHT_BRACKET = (env, a) => {
   if (a !== 0) {
-    env.pointer = findBracket(env.subroutine, { pointer: env.pointer, bracket: "[" });
+    env.pointer = findBracket(env.subroutine, {
+      pointer: env.pointer,
+      bracket: "[",
+    });
   }
 };
 
