@@ -1,10 +1,10 @@
 import { BUILT_INS } from "./core.js";
 import { panic } from "./utils.js";
 
-const DEBUG = false
+const DEBUG = false;
 
 function debug(...args) {
-  if (DEBUG) console.log(...args)
+  if (DEBUG) console.log(...args);
 }
 
 export function evaluate({ funcMap, subroutine, stack, memory }) {

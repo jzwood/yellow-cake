@@ -39,4 +39,4 @@ const memory = [];
 
 const args = { funcMap, subroutine, stack, memory };
 evaluate(args);
-console.log({stack, memory});
+console.log({ stack, memory });
