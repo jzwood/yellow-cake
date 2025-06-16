@@ -16,6 +16,10 @@ export function panic(predicate, err) {
   }
 }
 
+export function isInt(str) {
+  return /^\d+$/.test(str);
+}
+
 export function findBracket(arr, { pointer, bracket }) {
   const step = bracket === "]" ? +1 : -1;
   let balance = 0;

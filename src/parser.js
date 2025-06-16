@@ -2,7 +2,7 @@
  * PARSER
  */
 
-import { toDictOn } from "./utils.js";
+import { isInt, panic, toDictOn } from "./utils.js";
 
 function parseLine(line) {
   const tokens = line.matchAll(/[A-Z0-9_+-=\[\]\']+/g).map(([name]) => name)
@@ -16,9 +16,22 @@ function parseLine(line) {
   return { args, name, subroutine };
 }
 
-export function parse(file) {
-  return toDictOn(
-    file.replace(/\n+/g, "\n").trim().split(/\n/).map(parseLine),
-    "name",
+function parseFuel(line) {
+  const [fuel, label] = line.split(/\s+/);
+  panic(
+    label !== "FUEL" || !isInt(fuel),
+    'The first line of a program must be "<INT> FUEL"',
   );
+  return parseInt(fuel, 10);
+}
+
+export function parse(file) {
+  const [fuel, ...functions] = file.replace(/\n+/g, "\n").trim().split(/\n/);
+  return {
+    fuel: parseFuel(fuel),
+    funcMap: toDictOn(
+      functions.map(parseLine),
+      "name",
+    ),
+  };
 }

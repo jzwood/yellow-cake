@@ -7,9 +7,10 @@ function debug(...args) {
   if (DEBUG) console.log(...args);
 }
 
-export function evaluate({ funcMap, subroutine, stack, memory }) {
+export function evaluate({ fuel, funcMap, subroutine, stack, memory }) {
   const eop = subroutine.length;
   const env = {
+    fuel,
     pointer: 0,
     stack,
     subroutine,
@@ -25,6 +26,7 @@ export function evaluate({ funcMap, subroutine, stack, memory }) {
     } else if (instruction in funcMap) {
       const { args, subroutine } = funcMap[instruction];
       evaluate({
+        fuel,
         funcMap,
         subroutine: substitueArgs({ args, stack, subroutine }),
         stack,
@@ -34,6 +36,7 @@ export function evaluate({ funcMap, subroutine, stack, memory }) {
       panic(true, `Unrecognized instruction: ${instruction}`);
     }
     env.pointer++;
+    panic(++env.fuel.used > env.fuel.max, `All ${env.fuel.max} FUEL exhausted`);
     debug("END", { instruction, stack });
     debug("---------------------------");
   }
@@ -62,7 +65,5 @@ function substitueArgs({ args, stack, subroutine }) {
     {},
   );
   popStack(stack, args.length);
-  // in addition to subsituting args we need to remove args from the top of stack.
-  // TODO reconcile reduce and substitueArgs -- probably rename substitueArgs
   return subroutine.map((token) => transformToken[token] ?? token);
 }
