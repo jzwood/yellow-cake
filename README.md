@@ -3,7 +3,7 @@
   <h1>YELLOW CAKE</h1>
 </div>
 
-An reverse polish notation stack language with manual memory management
+A reverse polish notation stack language with manual memory management
 
 ### THEME
 
@@ -20,13 +20,14 @@ decrements the program's `FUEL`, ultimately halting once `FUEL` reaches 0. Thus
 #### DATA
 
 YC operates exclusively on 64-bit signed integers which can be pushed onto the
-stack or written to memory (ie consecutive 64-bit addresses).
+stack or written to memory (consecutive 64-bit addresses).
 
 #### OPERATORS
 
 YC contains built-in "primitive" operators, standard lib operators which are
-defined in terms of native operators, and user defined operators. Only
-evaluating native operators decrements `FUEL`. Consider the following operators:
+defined in terms of native operators, and user defined operators (at the moment
+std-lib operators must be included by user). Every operation decrements `FUEL`.
+Consider the following operators:
 
     A B MAX = A B GT A B IF_ELSE
 
@@ -35,9 +36,10 @@ like this
 
     A B MAX = ((A B GT) A B IF_ELSE)
 
-When `MAX` is encountered on the top of the stack, `MAX` and the next 2 fully
-resolved expressions are popped off the stack and replaced with the definition
-of `MAX`.
+When `MAX` is encountered on the top of the stack, the top 2 values on the stack
+are popped, evaluated by `MAX` as a subroutine, and the result is pushed on to
+the stack. The operators `GT` and `IF_ELSE` create their own nested subroutines
+(not depicted in example).
 
 ```
 | MAX |       | IF_ELSE  |        | MAX |       | IF_ELSE  |       | IF_ELSE  |      | 5   |
@@ -99,6 +101,15 @@ All other characters are considered comments and ignored (see grammar).
     A   ]     =
     P   PRINT =
 
+#### HOW TO RUN
+
+- make sure you have
+  [deno](https://docs.deno.com/runtime/getting_started/installation/) installed
+  - examples tested with `deno 2.0.5 (stable, release, x86_64-apple-darwin)`
+- usage: `deno run --allow-read exe.js <program.yc>`
+
+### EXAMPLES
+
 #### STD LIB
 
         T         = 1
@@ -115,6 +126,7 @@ All other characters are considered comments and ignored (see grammar).
     A B REM       = A B DIV SWAP DROP
     A   DUP       = A A
     P B IF        = P [ B 0 ]
+    P A B IF_ELSE  = P A IF P NOT B IF
     A   NEG       = 0 A -
     A B DIVISIBLE = A B REM 0 EQ
     A N REPLICATE = N N [ A SWAP DECR DUP ] [ F ]

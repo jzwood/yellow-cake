@@ -1,0 +1,14 @@
+400 FUEL
+
+P B IF = P [ B 0 ]
+P A B IF_ELSE = P A IF P NOT B IF
+
+A NOT = A A NAND
+
+
+P B IF = P [ B 0 ]
+P A B IF_ELSE = P A IF P NOT B IF
+
+A B MAX = A B GT A B IF_ELSE
+
+MAIN = 8 5 MAX
