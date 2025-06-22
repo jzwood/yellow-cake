@@ -2,12 +2,6 @@ import { parse } from "./parser.js";
 import { BUILT_INS } from "./core.js";
 import { panic } from "./utils.js";
 
-const DEBUG = false;
-
-function debug(...args) {
-  if (DEBUG) console.log(...args);
-}
-
 export function run(program) {
   const { fuel, funcMap } = parse(program);
   const { subroutine } = funcMap["MAIN"];
@@ -21,11 +15,10 @@ export function run(program) {
     stack,
     memory,
   };
-  evaluate(args);
-  return args;
+  return evaluate(args);
 }
 
-function evaluate({ fuel, funcMap, subroutine, stack, memory }) {
+function* evaluate({ fuel, funcMap, subroutine, stack, memory }) {
   const eop = subroutine.length;
   const env = {
     fuel,
@@ -36,14 +29,13 @@ function evaluate({ fuel, funcMap, subroutine, stack, memory }) {
   };
   while (env.pointer < eop) {
     const instruction = subroutine.at(env.pointer);
-    debug({ instruction, stack, subroutine, pointer: env.pointer });
     if (typeof instruction === "number") {
       env.stack.push(instruction);
     } else if (instruction in BUILT_INS) {
       reduce(env, BUILT_INS[instruction]);
     } else if (instruction in funcMap) {
       const { args, subroutine } = funcMap[instruction];
-      evaluate({
+      yield* evaluate({
         fuel,
         funcMap,
         subroutine: substitueArgs({ args, stack, subroutine }),
@@ -54,9 +46,8 @@ function evaluate({ fuel, funcMap, subroutine, stack, memory }) {
       panic(true, `Unrecognized instruction: ${instruction}`);
     }
     env.pointer++;
+    yield env;
     panic(++env.fuel.used > env.fuel.max, `All ${env.fuel.max} FUEL exhausted`);
-    debug("END", { instruction, stack });
-    debug("---------------------------");
   }
 }
 
