@@ -1,7 +1,4 @@
-import { parse } from "./src/parser.js";
-import { panic } from "./src/utils.js";
-import { BUILT_INS } from "./src/core.js";
-import { evaluate } from "./src/interpreter.js";
+import { run } from "./src/interpreter.js";
 
 const USAGE = "USAGE: deno run --allow-read exe.js <program.yc>";
 
@@ -16,20 +13,7 @@ async function main() {
   }
 
   const program = await Deno.readTextFile(filepath);
-  const { fuel, funcMap } = parse(program);
-  const { subroutine } = funcMap["MAIN"];
-  const stack = [];
-  const memory = [];
-
-  const args = {
-    fuel: { used: 0, max: fuel },
-    funcMap,
-    subroutine,
-    stack,
-    memory,
-  };
-  evaluate(args);
-  return args;
+  return run(program);
 }
 
 const { stack, memory, fuel } = await main();

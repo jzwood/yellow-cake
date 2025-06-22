@@ -1,3 +1,4 @@
+import { parse } from "./parser.js";
 import { BUILT_INS } from "./core.js";
 import { panic } from "./utils.js";
 
@@ -7,7 +8,24 @@ function debug(...args) {
   if (DEBUG) console.log(...args);
 }
 
-export function evaluate({ fuel, funcMap, subroutine, stack, memory }) {
+export function run(program) {
+  const { fuel, funcMap } = parse(program);
+  const { subroutine } = funcMap["MAIN"];
+  const stack = [];
+  const memory = [];
+
+  const args = {
+    fuel: { used: 0, max: fuel },
+    funcMap,
+    subroutine,
+    stack,
+    memory,
+  };
+  evaluate(args);
+  return args;
+}
+
+function evaluate({ fuel, funcMap, subroutine, stack, memory }) {
   const eop = subroutine.length;
   const env = {
     fuel,

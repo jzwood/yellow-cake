@@ -12,7 +12,7 @@ const READ = ({ memory }, p) => memory.at(p);
 const WRITE = ({ memory }, p, x) => {
   memory[p] = x;
 };
-const PRINT = ({ stack }, a) => console.log(a);
+const PRINT = ({ stack }, a) => console.info(a);
 const LEFT_BRACKET = (env, a) => {
   if (a === 0) {
     env.pointer = findBracket(env.subroutine, {
