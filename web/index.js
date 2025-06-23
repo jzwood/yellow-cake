@@ -11,7 +11,7 @@ function main() {
         const result = program.reduce((_, x) => x);
         output.textContent = envToString(result);
       } catch (err) {
-        alert(err)
+        alert(err);
       }
     }
   });
