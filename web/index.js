@@ -2,7 +2,17 @@ import { run } from "../src/interpreter.js";
 
 function main() {
   const input = document.getElementById("input");
-  const output = document.getElementById("input");
+  const output = document.getElementById("output");
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && e.shiftKey) {
+      const program = run(input.value);
+      const result = program.reduce((_, x) => x);
+      console.log(result);
+      output.textContent = envToString(result);
+    }
+  });
+
   // READ PROGRAM FROM TEXTAREA
   // GET GENERATOR
   //const program = run(program);
@@ -14,5 +24,13 @@ function main() {
 //const { stack, memory, fuel } = await main();
 //console.log(stack);
 //console.warn({ fuel });
+
+function envToString({ fuel, pointer, stack, subroutine, memory }) {
+  return [
+    `  FUEL: ${fuel.used}`,
+    `MEMORY: ${JSON.stringify(memory)}`,
+    ` STACK: ${JSON.stringify(stack)}`,
+  ].join("\n");
+}
 
 document.addEventListener("DOMContentLoaded", main);
