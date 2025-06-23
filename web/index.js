@@ -6,10 +6,13 @@ function main() {
 
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && e.shiftKey) {
-      const program = run(input.value);
-      const result = program.reduce((_, x) => x);
-      console.log(result);
-      output.textContent = envToString(result);
+      try {
+        const program = run(input.value);
+        const result = program.reduce((_, x) => x);
+        output.textContent = envToString(result);
+      } catch (err) {
+        alert(err)
+      }
     }
   });
 
