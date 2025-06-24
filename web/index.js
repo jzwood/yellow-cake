@@ -11,17 +11,19 @@ function main() {
     output.firstChild.nodeValue = envToString(env);
   };
 
+  const hook = () => window._yellow_cake_hook;
+
   let program;
 
   load.addEventListener("click", (e) => {
-    program = run(input.value);
+    program = run(input.value, hook());
     const { done, value } = program.next();
     writeOut(value);
   });
 
   evaluate.addEventListener("click", (e) => {
     try {
-      const program = run(input.value);
+      const program = run(input.value, hook());
       const result = program.reduce((_, x) => x);
       writeOut(result);
     } catch (err) {

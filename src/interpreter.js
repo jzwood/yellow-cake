@@ -2,8 +2,9 @@ import { parse } from "./parser.js";
 import { BUILT_INS } from "./core.js";
 import { panic } from "./utils.js";
 
-export function run(program) {
+export function run(program, hook = undefined) {
   const { fuel, funcMap } = parse(program);
+  if (hook) hook(funcMap);
   // I think it makes a little more sense to pass function name to evaluate instead of subroutine
   const { subroutine } = funcMap["MAIN"];
   const stack = [];
@@ -16,7 +17,6 @@ export function run(program) {
     stack,
     memory,
   };
-  //window.funcMap = funcMap
   return evaluate(args);
 }
 
