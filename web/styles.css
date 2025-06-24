@@ -33,6 +33,7 @@ main {
   overflow-y: auto;
   border: 2px solid cornflowerblue;
   background-color: lightgoldenrodyellow;
+  overflow: auto;
 }
 
 #controls {
