@@ -16,6 +16,7 @@ export function run(program) {
     stack,
     memory,
   };
+  //window.funcMap = funcMap
   return evaluate(args);
 }
 
