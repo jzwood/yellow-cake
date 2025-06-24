@@ -4,6 +4,7 @@ import { panic } from "./utils.js";
 
 export function run(program) {
   const { fuel, funcMap } = parse(program);
+  // I think it makes a little more sense to pass function name to evaluate instead of subroutine
   const { subroutine } = funcMap["MAIN"];
   const stack = [];
   const memory = [];

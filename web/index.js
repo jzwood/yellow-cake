@@ -16,7 +16,7 @@ function main() {
   load.addEventListener("click", (e) => {
     program = run(input.value);
     const { done, value } = program.next();
-    output.firstChild.nodeValue = envToString(value);
+    writeOut(value);
   });
 
   evaluate.addEventListener("click", (e) => {
