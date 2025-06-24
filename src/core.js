@@ -8,7 +8,7 @@ const GT = ({ stack }, a, b) => stack.push(+(a > b));
 const LT = ({ stack }, a, b) => stack.push(+(a < b));
 const EQ = ({ stack }, a, b) => stack.push(+(a === b));
 const NAND = ({ stack }, a, b) => stack.push(+!(!!a && !!b));
-const READ = ({ memory }, p) => memory.at(p);
+const READ = ({ stack, memory }, p) => stack.push(memory.at(p));
 const WRITE = ({ memory }, p, x) => {
   memory[p] = x;
 };

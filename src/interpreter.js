@@ -27,6 +27,7 @@ function* evaluate({ fuel, funcMap, subroutine, stack, memory }) {
     subroutine,
     memory,
   };
+  yield env;
   while (env.pointer < eop) {
     const instruction = subroutine.at(env.pointer);
     if (typeof instruction === "number") {
