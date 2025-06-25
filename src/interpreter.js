@@ -1,6 +1,6 @@
-import { parse } from "./parser.js";
-import { BUILT_INS, STD_LIB } from "./core.js";
-import { panic } from "./utils.js";
+import { parse } from "./parser.js?v=981B084C-5382-4F3D-AB58-A8D4684F3EAF";
+import { BUILT_INS, STD_LIB } from "./core.js?v=981B084C-5382-4F3D-AB58-A8D4684F3EAF";
+import { panic } from "./utils.js?v=981B084C-5382-4F3D-AB58-A8D4684F3EAF";
 
 export function run(program, hook = undefined) {
   const { fuel, funcMap } = parse(program);

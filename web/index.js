@@ -1,5 +1,5 @@
-import { run } from "../src/interpreter.js";
-import { FIZZBUZZ, MAX, REPLICATE } from "./examples.js";
+import { run } from "../src/interpreter.js?v=5568956A-0C27-456F-B95A-828035340A04";
+import { FIZZBUZZ, MAX, REPLICATE } from "./examples.js?v=5568956A-0C27-456F-B95A-828035340A04";
 
 function main() {
   const input = document.getElementById("input");
