@@ -5,7 +5,6 @@ import { panic } from "./utils.js";
 export function run(program, hook = undefined) {
   const { fuel, funcMap } = parse(program);
   Object.assign(STD_LIB, funcMap);
-  console.log(STD_LIB);
   if (hook) hook(funcMap);
   // I think it makes a little more sense to pass function name to evaluate instead of subroutine
   const { subroutine } = funcMap["MAIN"];
