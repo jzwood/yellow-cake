@@ -79,9 +79,10 @@
     <dialog id="spec-modal">
       <h2>YELLOW CAKE</h2>
       <i>a baby stack language</i>
-      <h2>GRAMMAR</h2>
-      <pre
-      >
+      <details>
+        <summary>GRAMMAR</summary>
+        <pre
+        >
 WORD    := { A-Z | 0-9 | "_" } ["'" | 0-9]
 COMMENT := a-z | "(" | ")"
 INT     := { 0-9 }
@@ -92,10 +93,12 @@ OP_FUNC := { PARAM } OP_NAME "=" OP_BODY EOL
 MAIN    := "MAIN =" OP_BODY
 PROGRAM := INT "FUEL" EOL { OP_FUNC } MAIN
       </pre
-      >
-      <h2>BUILT INS</h2>
-      <pre
-      >
+        >
+      </details>
+      <details>
+        <summary>BUILT INS</summary>
+        <pre
+        >
 A B +     = _     addition
 A B *     = _     multiplication
 A B -     = _     subtraction
@@ -110,10 +113,12 @@ A   [     =       if A ≠ 0 continue, otherwise jump to matching ]
 A   ]     =       if A ≠ 0 continue, otherwise jump to matching [
 A   PRINT =       print A to terminal or console
       </pre
-      >
-      <h2>STD LIB</h2>
-      <pre
-      >
+        >
+      </details>
+      <details>
+        <summary>STD LIB</summary>
+        <pre
+        >
 A   DROP  =
 A   DUP   = A A
 A B SWAP  = B A
@@ -121,7 +126,8 @@ A B AND   = (A B NAND) (A B NAND) NAND
 A B OR    = (A A NAND) (B B NAND) NAND
 A   NOT   = A A NAND
       </pre
-      >
+        >
+      </details>
       <button autofocus onclick="document.getElementById('spec-modal').close()">
         Ok
       </button>
