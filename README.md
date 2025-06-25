@@ -114,26 +114,25 @@ All other characters are considered comments and ignored (see grammar).
 
         T         = 1
         F         = 0
-    A   DROP      =
     A   DECR      = A 1 -
     A   INCR      = A 1 +
+    A   DROP      =
     A B SWAP      = B A
     A B AND       = (A B NAND) (A B NAND) NAND
     A B OR        = (A A NAND) (B B NAND) NAND
-    A B NOR       = A B OR NOT
     A   NOT       = A A NAND
     A B NOR       = A B OR NOT
     A B REM       = A B DIV SWAP DROP
     A   DUP       = A A
-    P B IF        = P [ B 0 ]
-    P A B IF_ELSE  = P A IF P NOT B IF
     A   NEG       = 0 A -
+    P B IF        = P [ B 0 ]
+    P A B IF_ELSE = P A IF P NOT B IF
     A B DIVISIBLE = A B REM 0 EQ
     A N REPLICATE = N N [ A SWAP DECR DUP ] [ F ]
 
 #### UNTESTED EXAMPLES
 
-    P P' CP    = P' P READ WRITE
+    P P' CP         = P' P READ WRITE
     A B  DUP2       = A B A B
     P P' MEMSWAP    = (P READ) (P (P' READ) WRITE) P' WRITE
     I W  REVERSE    = I (I W +) W 1 GT [MEMSWAP (I DECR) (W 2 -) DUP2 GT]

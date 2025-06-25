@@ -1,4 +1,5 @@
-import { findBracket, panic } from "./utils.js";
+import { findBracket, panic, toDictOn } from "./utils.js";
+import { parseLine } from "./parser.js";
 
 const PLUS = ({ stack }, a, b) => stack.push(a + b);
 const X = ({ stack }, a, b) => stack.push(a * b);
@@ -29,6 +30,18 @@ const RIGHT_BRACKET = (env, a) => {
     });
   }
 };
+
+export const STD_LIB = toDictOn(
+  [
+    "A DROP =",
+    "A DUP = A A",
+    "A B SWAP = B A",
+    "A B AND = (A B NAND) (A B NAND) NAND",
+    "A B OR = (A A NAND) (B B NAND) NAND",
+    "A NOT = A A NAND",
+  ].map(parseLine),
+  "name",
+);
 
 export const BUILT_INS = {
   "+": PLUS,

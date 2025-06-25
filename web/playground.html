@@ -83,14 +83,14 @@
       <pre
       >
 WORD    := { A-Z | 0-9 | "_" } ["'" | 0-9]
-COMMENT := { a-z }
+COMMENT := a-z | "(" | ")"
 INT     := { 0-9 }
 PARAM   := WORD
 OP_NAME := WORD
-OP_BODY := { INT | OP_NAME } EOL
-OP_FUNC := { PARAM } OP_NAME "=" OP_BODY
+OP_BODY := { INT | OP_NAME | "+" | "*" | "-" | "[" | "]" }
+OP_FUNC := { PARAM } OP_NAME "=" OP_BODY EOL
 MAIN    := "MAIN =" OP_BODY
-PROGRAM := INT "FUEL" { OP_FUNC } MAIN
+PROGRAM := INT "FUEL" EOL { OP_FUNC } MAIN
       </pre
       >
       <h2>BUILT INS</h2>
@@ -109,6 +109,17 @@ P X WRITE =       writes X value to P index in memory
 A   [     =       if A ≠ 0 continue, otherwise jump to matching ]
 A   ]     =       if A ≠ 0 continue, otherwise jump to matching [
 A   PRINT =       print A to terminal or console
+      </pre
+      >
+      <h2>STD LIB</h2>
+      <pre
+      >
+A   DROP  =
+A   DUP   = A A
+A B SWAP  = B A
+A B AND   = (A B NAND) (A B NAND) NAND
+A B OR    = (A A NAND) (B B NAND) NAND
+A   NOT   = A A NAND
       </pre
       >
       <button autofocus onclick="document.getElementById('spec-modal').close()">
