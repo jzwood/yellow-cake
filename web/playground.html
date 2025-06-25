@@ -7,44 +7,51 @@
       content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"
     />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="stylesheet" href="styles.css?version=2" />
-    <meta name="title" content="YELLOW CAKE" />
+    <link rel="stylesheet" href="styles.css?version=3" />
+
+    <!-- HTML Meta Tags -->
+    <title>Yellow Cake</title>
     <meta name="description" content="Yellow Cake Playground" />
-    <meta property="og:description" content="Yellow Cake Playground" />
-    <meta property="og:type" content="website" />
+
+    <!-- Facebook Meta Tags -->
     <meta
       property="og:url"
       content="https://jzwood.github.io/yellow-cake/web/playground.html"
     />
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="Yellow Cake" />
+    <meta property="og:description" content="Yellow Cake Playground" />
     <meta
       property="og:image"
       content="https://jzwood.github.io/yellow-cake/web/logo.jpg"
     />
-    <title>YELLOW CAKE</title>
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="jzwood.github.io" />
+    <meta
+      property="twitter:url"
+      content="https://jzwood.github.io/yellow-cake/web/playground.html"
+    />
+    <meta name="twitter:title" content="Yellow Cake" />
+    <meta name="twitter:description" content="Yellow Cake Playground" />
+    <meta
+      name="twitter:image"
+      content="https://jzwood.github.io/yellow-cake/web/logo.jpg"
+    />
   </head>
   <body>
     <main>
+      <div id="examples">
+        <button id="max">MAX</button>
+        <button id="replicate">REPLICATE</button>
+        <button id="fizzbuzz">FIZZBUZZ</button>
+      </div>
       <textarea
         id="input"
         cols="40"
         spellcheck="false"
-      >
-400 FUEL
-
-P B IF = P [ B 0 ]
-P A B IF_ELSE = P A IF P NOT B IF
-
-A NOT = A A NAND
-
-P B IF = P [ B 0 ]
-P A B IF_ELSE = P A IF P NOT B IF
-
-A B MAX = A B GT A B IF_ELSE
-
-MAIN = 8 5 MAX
-      </textarea
-      >
+      ></textarea>
       <pre
         id="output"
       >
@@ -52,10 +59,62 @@ MAIN = 8 5 MAX
           <button id="load">LOAD/RESET</button>
           <button id="eval">EVAL</button>
           <button id="step">STEP</button>
+          <span class="spacer"></span>
+          <button id="about" onclick="document.getElementById('about-modal').showModal()">ABOUT</button>
+          <button id="spec" onclick="document.getElementById('spec-modal').showModal()">SPEC</button>
+          <a href="https://github.com/jzwood/yellow-cake" target="_blank">GITHUB ↗</a>
         </div>
       </pre
       >
     </main>
-    <script type="module" src="index.js?version=2"></script>
+    <dialog id="about-modal">
+      <p>YELLOW CAKE was made by Jake Wood</p>
+      <button
+        autofocus
+        onclick="document.getElementById('about-modal').close()"
+      >
+        Ok
+      </button>
+    </dialog>
+    <dialog id="spec-modal">
+      <h2>YELLOW CAKE</h2>
+      <i>a baby stack language</i>
+      <h2>GRAMMAR</h2>
+      <pre
+      >
+WORD    := { A-Z | 0-9 | "_" } ["'" | 0-9]
+COMMENT := { a-z }
+INT     := { 0-9 }
+PARAM   := WORD
+OP_NAME := WORD
+OP_BODY := { INT | OP_NAME } EOL
+OP_FUNC := { PARAM } OP_NAME "=" OP_BODY
+MAIN    := "MAIN =" OP_BODY
+PROGRAM := INT "FUEL" { OP_FUNC } MAIN
+      </pre
+      >
+      <h2>BUILT INS</h2>
+      <pre
+      >
+A B +     = _     addition
+A B *     = _     multiplication
+A B -     = _     subtraction
+A B DIV   = _ _   int division and remainder
+A B GT    = _     greater than
+A B LT    = _     less than
+A B EQ    = _     equals
+A B NAND  = _     not and
+P   READ  = _     push value at P index in memory to stack
+P X WRITE =       writes X value to P index in memory
+A   [     =       if A ≠ 0 continue, otherwise jump to matching ]
+A   ]     =       if A ≠ 0 continue, otherwise jump to matching [
+A   PRINT =       print A to terminal or console
+      </pre
+      >
+      <button autofocus onclick="document.getElementById('spec-modal').close()">
+        Ok
+      </button>
+    </dialog>
+    <script type="module" src="index.js"></script>
   </body>
 </html>

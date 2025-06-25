@@ -1,4 +1,5 @@
 import { run } from "../src/interpreter.js";
+import { FIZZBUZZ, MAX, REPLICATE } from "./examples.js";
 
 function main() {
   const input = document.getElementById("input");
@@ -6,6 +7,9 @@ function main() {
   const load = document.getElementById("load");
   const evaluate = document.getElementById("eval");
   const step = document.getElementById("step");
+  const max = document.getElementById("max");
+  const replicate = document.getElementById("replicate");
+  const fizzbuzz = document.getElementById("fizzbuzz");
 
   const writeOut = (env) => {
     output.firstChild.nodeValue = envToString(env);
@@ -14,6 +18,18 @@ function main() {
   const hook = () => window._yellow_cake_hook;
 
   let program;
+
+  max.addEventListener("click", (e) => {
+    input.value = MAX;
+  });
+
+  replicate.addEventListener("click", (e) => {
+    input.value = REPLICATE;
+  });
+
+  fizzbuzz.addEventListener("click", (e) => {
+    input.value = FIZZBUZZ;
+  });
 
   load.addEventListener("click", (e) => {
     program = run(input.value, hook());
