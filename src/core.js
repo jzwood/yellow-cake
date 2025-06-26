@@ -1,4 +1,8 @@
-import { findBracket, panic, toDictOn } from "./utils.js?v=DEB78C5D-E367-4DA0-AD3C-721FAF15D8D6";
+import {
+  findBracket,
+  panic,
+  toDictOn,
+} from "./utils.js?v=DEB78C5D-E367-4DA0-AD3C-721FAF15D8D6";
 import { parseLine } from "./parser.js?v=DEB78C5D-E367-4DA0-AD3C-721FAF15D8D6";
 
 const PLUS = ({ stack }, a, b) => stack.push(a + b);

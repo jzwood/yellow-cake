@@ -2,7 +2,11 @@
  * PARSER
  */
 
-import { isInt, panic, toDictOn } from "./utils.js?v=6A5A1EBE-F4C0-4CFE-9417-A1671F94ADD2";
+import {
+  isInt,
+  panic,
+  toDictOn,
+} from "./utils.js?v=6A5A1EBE-F4C0-4CFE-9417-A1671F94ADD2";
 
 export function parseLine(line) {
   const tokens = line.matchAll(/[A-Z0-9_+-=\[\]\']+/g).map(([name]) => name)
