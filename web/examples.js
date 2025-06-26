@@ -1,20 +1,20 @@
 export const MAX = `
 400 FUEL
 
-A DROP =
 A B P IF_ELSE = 1 P [ DROP A 0 0 ] [ B 0 ]
 A B MAX = A B A B GT IF_ELSE
 
 MAIN = 24 13 MAX
 `.trim();
 
+export const RANGE = `
+N RANGE = 1 N [ DUP INCR DUP N LT ]
+`.trim();
+
 export const REPLICATE = `
 500 FUEL
 
 FALSE = 0
-A DECR = A 1 -
-A B SWAP = B A
-A DUP = A A
 A N REPLICATE = N N [ A SWAP DECR DUP ] [ FALSE ]
 
 MAIN = 3 7 REPLICATE
@@ -23,7 +23,6 @@ MAIN = 3 7 REPLICATE
 export const FIZZBUZZ = `
 4877 FUEL
 
-A INCR = A 1 +
 A B REM = A B DIV SWAP DROP
 A NEG = 0 A -
 A B DIVISIBLE = A B REM 0 EQ
@@ -40,10 +39,17 @@ MAIN = 22 FIZZBUZZ
 export const FIBONACCI = `
 1000 FUEL
 
-A DECR = A 1 -
 A B N NEXT = A B (A B +) (N DECR) DUP
 
 N FIB = 1 1 N N [ NEXT ] DROP
 
 MAIN = 15 FIB
 `.trim();
+
+/*
+ * IDEAS:
+ * is memory between P1 and P2 a palendrome?
+ * reverse memory between P1 and P2
+ * smallest value between P1 and P2
+ * produce all collatz numbers starting from N
+ */

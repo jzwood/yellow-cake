@@ -9,7 +9,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link
       rel="stylesheet"
-      href="styles.css?v=D89901B7-61A7-4207-8827-76092E2B5881"
+      href="styles.css?v=627786C4-90B8-4CBF-A80E-8D26CAADF158"
     />
 
     <!-- HTML Meta Tags -->
@@ -116,8 +116,8 @@ A B EQ    = _     equals
 A B NAND  = _     not and
 P   READ  = _     push value at P index in memory to stack
 P X WRITE =       writes X value to P index in memory
-A   [     =       if A ≠ 0 continue, otherwise jump to matching ]
-A   ]     =       if A ≠ 0 continue, otherwise jump to matching [
+A   [     =       if A = 0 jump to matching ] else continue
+A   ]     =       if A = 0 continue, else jump to matching [
 A   PRINT =       print A to terminal or console
       </pre
         >
@@ -128,6 +128,8 @@ A   PRINT =       print A to terminal or console
         >
 A   DROP  =
 A   DUP   = A A
+A   INCR  = A 1 +
+A   DECR  = A 1 -
 A B SWAP  = B A
 A B AND   = (A B NAND) (A B NAND) NAND
 A B OR    = (A A NAND) (B B NAND) NAND
@@ -141,7 +143,7 @@ A   NOT   = A A NAND
     </dialog>
     <script
       type="module"
-      src="index.js?v=D89901B7-61A7-4207-8827-76092E2B5881"
+      src="index.js?v=627786C4-90B8-4CBF-A80E-8D26CAADF158"
     ></script>
   </body>
 </html>

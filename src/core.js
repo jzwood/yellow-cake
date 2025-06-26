@@ -2,8 +2,8 @@ import {
   findBracket,
   panic,
   toDictOn,
-} from "./utils.js?v=DEB78C5D-E367-4DA0-AD3C-721FAF15D8D6";
-import { parseLine } from "./parser.js?v=DEB78C5D-E367-4DA0-AD3C-721FAF15D8D6";
+} from "./utils.js?v=CE5ECDB7-9800-439B-9168-5A45F675B48E";
+import { parseLine } from "./parser.js?v=CE5ECDB7-9800-439B-9168-5A45F675B48E";
 
 const PLUS = ({ stack }, a, b) => stack.push(a + b);
 const X = ({ stack }, a, b) => stack.push(a * b);
@@ -39,6 +39,8 @@ export const STD_LIB = toDictOn(
   [
     "A DROP =",
     "A DUP = A A",
+    "A INCR = A 1 +",
+    "A DECR = A 1 -",
     "A B SWAP = B A",
     "A B AND = (A B NAND) (A B NAND) NAND",
     "A B OR = (A A NAND) (B B NAND) NAND",

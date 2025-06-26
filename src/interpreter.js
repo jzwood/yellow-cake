@@ -1,9 +1,9 @@
-import { parse } from "./parser.js?v=981B084C-5382-4F3D-AB58-A8D4684F3EAF";
+import { parse } from "./parser.js?v=490AF1EF-AB85-457B-A202-8EE4849282A6";
 import {
   BUILT_INS,
   STD_LIB,
-} from "./core.js?v=981B084C-5382-4F3D-AB58-A8D4684F3EAF";
-import { panic } from "./utils.js?v=981B084C-5382-4F3D-AB58-A8D4684F3EAF";
+} from "./core.js?v=490AF1EF-AB85-457B-A202-8EE4849282A6";
+import { panic } from "./utils.js?v=490AF1EF-AB85-457B-A202-8EE4849282A6";
 
 export function run(program, hook = undefined) {
   const { fuel, funcMap } = parse(program);

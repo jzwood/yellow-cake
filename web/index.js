@@ -1,9 +1,9 @@
-import { run } from "../src/interpreter.js?v=5568956A-0C27-456F-B95A-828035340A04";
+import { run } from "../src/interpreter.js?v=9F9E3EA7-DDDD-40E1-A8AF-950D91B5539F";
 import {
   FIZZBUZZ,
   MAX,
   REPLICATE,
-} from "./examples.js?v=5568956A-0C27-456F-B95A-828035340A04";
+} from "./examples.js?v=9F9E3EA7-DDDD-40E1-A8AF-950D91B5539F";
 
 function main() {
   const input = document.getElementById("input");
