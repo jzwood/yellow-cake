@@ -1,14 +1,7 @@
 400 FUEL
 
-P B IF = P [ B 0 ]
-P A B IF_ELSE = P A IF P NOT B IF
+A DROP =
+A B P IF_ELSE = 1 P [ DROP A 0 0 ] [ B 0 ]
+A B MAX = A B A B GT IF_ELSE
 
-A NOT = A A NAND
-
-
-P B IF = P [ B 0 ]
-P A B IF_ELSE = P A IF P NOT B IF
-
-A B MAX = A B GT A B IF_ELSE
-
-MAIN = 8 5 MAX
+MAIN = 24 13 MAX
