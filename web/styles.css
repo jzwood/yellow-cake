@@ -13,7 +13,7 @@ main {
   min-height: 100vh;
 }
 
-#input, #output, button, dialog {
+#input, #output, button, select, option, dialog {
   font-family: "Departure", Courier, monospace;
 }
 
@@ -36,12 +36,19 @@ main {
   overflow: auto;
 }
 
+#github {
+  align-self: center;
+}
+
+#challenges {
+  font-size: inherit;
+}
+
 #controls, #examples {
   position: absolute;
   bottom: 0.5rem;
   left: 0.5rem;
   display: flex;
-  align-items: baseline;
   column-gap: 0.5rem;
   width: calc(100% - 1rem);
 

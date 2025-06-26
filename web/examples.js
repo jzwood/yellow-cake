@@ -36,3 +36,14 @@ N FIZZBUZZ = 1 N [ DUP FIZZ_OR_BUZZ SWAP INCR DUP N LT ]
 
 MAIN = 22 FIZZBUZZ
 `.trim();
+
+export const FIBONACCI = `
+1000 FUEL
+
+A DECR = A 1 -
+A B N NEXT = A B (A B +) (N DECR) DUP
+
+N FIB = 1 1 N N [ NEXT ] DROP
+
+MAIN = 15 FIB
+`.trim();
