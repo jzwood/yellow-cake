@@ -19,6 +19,7 @@ function main() {
 
   challenges.addEventListener("input", (e) => {
     const value = e.target.value;
+    if (value === "") return;
     const example = examples[value];
     if (example == null) {
       alert(`Example ${value} missing from corpus`);
