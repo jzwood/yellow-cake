@@ -74,11 +74,34 @@ MAIN = 15 FIB
 `,
 };
 
-export const DOUBLE_DOUBLE = { instructions: "", program: "" };
-export const HELLO_WORLD = { instructions: "", program: "" };
-export const POWER = { instructions: "", program: "" };
-export const HAILSTONE = { instructions: "", program: "" };
-export const REVERSE = { instructions: "", program: "" };
+export const DOUBLE_DOUBLE = {
+  instructions: "",
+  program: `
+20 FUEL
+
+A DOUBLE_DOUBLE = A 4 *
+
+MAIN = 32 DOUBLE_DOUBLE
+`,
+};
+export const HELLO_WORLD = {
+  instructions: "",
+  program: "no implemenation yet",
+};
+export const POWER = {
+  instructions: "",
+  program: `
+100 FUEL
+
+BASE ACC EXP POW = BASE (ACC BASE *) EXP DECR DUP
+B E POWER = B 1 E B [ POW ] CLEAN
+_ X _ CLEAN = X
+
+MAIN = 9 2 POWER
+`,
+};
+export const HAILSTONE = { instructions: "", program: "no implemenation yet" };
+export const REVERSE = { instructions: "", program: "no implemenation yet" };
 
 /*
  * IDEAS:

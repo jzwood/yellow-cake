@@ -2,11 +2,11 @@ import {
   findBracket,
   panic,
   toDictOn,
-} from "./utils.js?v=CE5ECDB7-9800-439B-9168-5A45F675B48E";
-import { parseLine } from "./parser.js?v=CE5ECDB7-9800-439B-9168-5A45F675B48E";
+} from "./utils.js?v=29B4AF4F-2C1D-4AB8-8DE3-DDDD845E8433";
+import { parseLine } from "./parser.js?v=29B4AF4F-2C1D-4AB8-8DE3-DDDD845E8433";
 
 const PLUS = ({ stack }, a, b) => stack.push(a + b);
-const X = ({ stack }, a, b) => stack.push(a * b);
+const MULT = ({ stack }, a, b) => stack.push(a * b);
 const SUB = ({ stack }, a, b) => stack.push(a - b);
 const DIV = ({ stack }, a, b) => stack.push(Math.floor(a / b), a % b);
 const GT = ({ stack }, a, b) => stack.push(+(a > b));
@@ -17,6 +17,7 @@ const READ = ({ stack, memory }, p) => stack.push(memory.at(p));
 const WRITE = ({ memory }, p, x) => {
   memory[p] = x;
 };
+// PRINT REALLY SHOULD BE `P W PRINT =`
 const PRINT = ({ stack }, a) => console.info(a);
 const LEFT_BRACKET = (env, a) => {
   if (a === 0) {
@@ -52,7 +53,7 @@ export const STD_LIB = toDictOn(
 export const BUILT_INS = {
   "+": PLUS,
   "-": SUB,
-  [X.name]: X,
+  "*": MULT,
   [DIV.name]: DIV,
   [GT.name]: GT,
   [LT.name]: LT,

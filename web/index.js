@@ -1,5 +1,5 @@
-import { run } from "../src/interpreter.js?v=9F9E3EA7-DDDD-40E1-A8AF-950D91B5539F";
-import * as examples from "./examples.js?v=9F9E3EA7-DDDD-40E1-A8AF-950D91B5539F";
+import { run } from "../src/interpreter.js?v=F7D8E185-8029-4835-AA0F-EA04C2F22E98";
+import * as examples from "./examples.js?v=F7D8E185-8029-4835-AA0F-EA04C2F22E98";
 
 function main() {
   const input = document.getElementById("input");
@@ -17,9 +17,14 @@ function main() {
 
   let program;
 
-  challenges.addEventListener("change", (e) => {
+  challenges.addEventListener("input", (e) => {
     const value = e.target.value;
-    console.log(examples, value);
+    const example = examples[value];
+    if (example == null) {
+      alert(`Example ${value} missing from corpus`);
+    }
+    const { program, instructions } = example;
+    input.value = program.trim();
   });
 
   load.addEventListener("click", (e) => {
@@ -39,13 +44,15 @@ function main() {
   });
 
   step.addEventListener("click", (e) => {
-    try {
-      const { done, value } = program.next();
-      if (!done) {
-        writeOut(value);
+    if (program instanceof Iterator) {
+      try {
+        const { done, value } = program.next();
+        if (!done) {
+          writeOut(value);
+        }
+      } catch (err) {
+        alert(err);
       }
-    } catch (err) {
-      // DO NOTHING
     }
   });
 }
