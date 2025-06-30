@@ -5,11 +5,20 @@ A B P IF_ELSE = 1 P [ DROP A 0 0 ] [ B 0 ]
 A B MAX = A B A B GT IF_ELSE
 
 MAIN = 24 13 MAX
-`.trim();
+`;
+
+export const IS_EVEN = `
+100 FUEL
+
+REM = DIV SWAP DROP
+IS_EVEN = 2 REM 0 EQ
+
+MAIN = 321 IS_EVEN
+`;
 
 export const RANGE = `
 N RANGE = 1 N [ DUP INCR DUP N LT ]
-`.trim();
+`;
 
 export const REPLICATE = `
 500 FUEL
@@ -18,7 +27,7 @@ FALSE = 0
 A N REPLICATE = N N [ A SWAP DECR DUP ] [ FALSE ]
 
 MAIN = 3 7 REPLICATE
-`.trim();
+`;
 
 export const FIZZBUZZ = `
 4877 FUEL
@@ -34,7 +43,7 @@ N FIZZ_OR_BUZZ = 1 (N IS_FIZZ N IS_BUZZ AND) [ DROP 35 NEG 0 0 ] [ 1 N IS_FIZZ [
 N FIZZBUZZ = 1 N [ DUP FIZZ_OR_BUZZ SWAP INCR DUP N LT ]
 
 MAIN = 22 FIZZBUZZ
-`.trim();
+`;
 
 export const FIBONACCI = `
 1000 FUEL
@@ -44,7 +53,7 @@ A B N NEXT = A B (A B +) (N DECR) DUP
 N FIB = 1 1 N N [ NEXT ] DROP
 
 MAIN = 15 FIB
-`.trim();
+`;
 
 /*
  * IDEAS:

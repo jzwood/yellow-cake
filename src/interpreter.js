@@ -5,14 +5,12 @@ import {
 } from "./core.js?v=490AF1EF-AB85-457B-A202-8EE4849282A6";
 import { panic } from "./utils.js?v=490AF1EF-AB85-457B-A202-8EE4849282A6";
 
-export function run(program, hook = undefined) {
+export function run({ program, stack = [], memory = [], hook = undefined }) {
   const { fuel, funcMap } = parse(program);
   Object.assign(funcMap, { ...STD_LIB, ...funcMap });
   if (hook) hook(funcMap);
-  // I think it makes a little more sense to pass function name to evaluate instead of subroutine
+
   const { subroutine } = funcMap["MAIN"];
-  const stack = [];
-  const memory = [];
 
   const args = {
     fuel: { used: 0, max: fuel },
@@ -53,8 +51,8 @@ function* evaluate({ fuel, funcMap, subroutine, stack, memory }) {
       panic(true, `Unrecognized instruction: ${instruction}`);
     }
     env.pointer++;
-    yield env;
     panic(++env.fuel.used > env.fuel.max, `All ${env.fuel.max} FUEL exhausted`);
+    yield env;
   }
 }
 

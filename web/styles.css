@@ -40,7 +40,7 @@ main {
   align-self: center;
 }
 
-#challenges {
+select {
   font-size: inherit;
 }
 

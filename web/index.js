@@ -11,9 +11,9 @@ function main() {
   const load = document.getElementById("load");
   const evaluate = document.getElementById("eval");
   const step = document.getElementById("step");
-  const max = document.getElementById("max");
-  const replicate = document.getElementById("replicate");
-  const fizzbuzz = document.getElementById("fizzbuzz");
+  //const max = document.getElementById("max");
+  //const replicate = document.getElementById("replicate");
+  //const fizzbuzz = document.getElementById("fizzbuzz");
 
   const writeOut = (env) => {
     output.firstChild.nodeValue = envToString(env);
@@ -23,27 +23,27 @@ function main() {
 
   let program;
 
-  max.addEventListener("click", (e) => {
-    input.value = MAX;
-  });
+  //max.addEventListener("click", (e) => {
+  //input.value = MAX;
+  //});
 
-  replicate.addEventListener("click", (e) => {
-    input.value = REPLICATE;
-  });
+  //replicate.addEventListener("click", (e) => {
+  //input.value = REPLICATE;
+  //});
 
-  fizzbuzz.addEventListener("click", (e) => {
-    input.value = FIZZBUZZ;
-  });
+  //fizzbuzz.addEventListener("click", (e) => {
+  //input.value = FIZZBUZZ;
+  //});
 
   load.addEventListener("click", (e) => {
-    program = run(input.value, hook());
+    program = run({ program: input.value, hook: hook() });
     const { done, value } = program.next();
     writeOut(value);
   });
 
   evaluate.addEventListener("click", (e) => {
     try {
-      const program = run(input.value, hook());
+      const program = run({ program: input.value, hook: hook() });
       const result = program.reduce((_, x) => x);
       writeOut(result);
     } catch (err) {

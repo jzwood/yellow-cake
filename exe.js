@@ -13,7 +13,7 @@ async function main() {
   }
 
   const program = await Deno.readTextFile(filepath);
-  return run(program).reduce((_, env) => env);
+  return run({ program }).reduce((_, env) => env);
 }
 
 const { stack, memory, fuel } = await main();

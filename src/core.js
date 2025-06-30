@@ -39,8 +39,8 @@ export const STD_LIB = toDictOn(
   [
     "A DROP =",
     "A DUP = A A",
-    "A INCR = A 1 +",
-    "A DECR = A 1 -",
+    "INCR = 1 +",
+    "DECR = 1 -",
     "A B SWAP = B A",
     "A B AND = (A B NAND) (A B NAND) NAND",
     "A B OR = (A A NAND) (B B NAND) NAND",
