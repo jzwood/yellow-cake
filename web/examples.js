@@ -1,35 +1,50 @@
-export const MAX = `
-400 FUEL
+export const MAX = {
+  instructions: "",
+  program: `
+100 FUEL
 
-A B P IF_ELSE = 1 P [ DROP A 0 0 ] [ B 0 ]
-A B MAX = A B A B GT IF_ELSE
+A B MAX = A A B LT [ DROP B 0 ]
 
-MAIN = 24 13 MAX
-`;
+MAIN = 8 2 MAX
+`,
+};
 
-export const IS_EVEN = `
+export const IS_EVEN = {
+  instructions: "",
+  program: `
 100 FUEL
 
 REM = DIV SWAP DROP
 IS_EVEN = 2 REM 0 EQ
 
 MAIN = 321 IS_EVEN
-`;
+`,
+};
 
-export const RANGE = `
+export const RANGE = {
+  instructions: "",
+  program: `
+100 FUEL
+
 N RANGE = 1 N [ DUP INCR DUP N LT ]
-`;
+`,
+};
 
-export const REPLICATE = `
+export const REPLICATE = {
+  instructions: "",
+  program: `
 500 FUEL
 
 FALSE = 0
 A N REPLICATE = N N [ A SWAP DECR DUP ] [ FALSE ]
 
 MAIN = 3 7 REPLICATE
-`;
+`,
+};
 
-export const FIZZBUZZ = `
+export const FIZZBUZZ = {
+  instructions: "",
+  program: `
 4877 FUEL
 
 A B REM = A B DIV SWAP DROP
@@ -43,9 +58,12 @@ N FIZZ_OR_BUZZ = 1 (N IS_FIZZ N IS_BUZZ AND) [ DROP 35 NEG 0 0 ] [ 1 N IS_FIZZ [
 N FIZZBUZZ = 1 N [ DUP FIZZ_OR_BUZZ SWAP INCR DUP N LT ]
 
 MAIN = 22 FIZZBUZZ
-`;
+`,
+};
 
-export const FIBONACCI = `
+export const FIBONACCI = {
+  instructions: "",
+  program: `
 1000 FUEL
 
 A B N NEXT = A B (A B +) (N DECR) DUP
@@ -53,7 +71,14 @@ A B N NEXT = A B (A B +) (N DECR) DUP
 N FIB = 1 1 N N [ NEXT ] DROP
 
 MAIN = 15 FIB
-`;
+`,
+};
+
+export const DOUBLE_DOUBLE = { instructions: "", program: "" };
+export const HELLO_WORLD = { instructions: "", program: "" };
+export const POWER = { instructions: "", program: "" };
+export const HAILSTONE = { instructions: "", program: "" };
+export const REVERSE = { instructions: "", program: "" };
 
 /*
  * IDEAS:

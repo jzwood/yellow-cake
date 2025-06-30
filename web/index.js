@@ -1,9 +1,5 @@
 import { run } from "../src/interpreter.js?v=9F9E3EA7-DDDD-40E1-A8AF-950D91B5539F";
-import {
-  FIZZBUZZ,
-  MAX,
-  REPLICATE,
-} from "./examples.js?v=9F9E3EA7-DDDD-40E1-A8AF-950D91B5539F";
+import * as examples from "./examples.js?v=9F9E3EA7-DDDD-40E1-A8AF-950D91B5539F";
 
 function main() {
   const input = document.getElementById("input");
@@ -11,9 +7,7 @@ function main() {
   const load = document.getElementById("load");
   const evaluate = document.getElementById("eval");
   const step = document.getElementById("step");
-  //const max = document.getElementById("max");
-  //const replicate = document.getElementById("replicate");
-  //const fizzbuzz = document.getElementById("fizzbuzz");
+  const challenges = document.getElementById("challenges");
 
   const writeOut = (env) => {
     output.firstChild.nodeValue = envToString(env);
@@ -23,17 +17,10 @@ function main() {
 
   let program;
 
-  //max.addEventListener("click", (e) => {
-  //input.value = MAX;
-  //});
-
-  //replicate.addEventListener("click", (e) => {
-  //input.value = REPLICATE;
-  //});
-
-  //fizzbuzz.addEventListener("click", (e) => {
-  //input.value = FIZZBUZZ;
-  //});
+  challenges.addEventListener("change", (e) => {
+    const value = e.target.value;
+    console.log(examples, value);
+  });
 
   load.addEventListener("click", (e) => {
     program = run({ program: input.value, hook: hook() });
