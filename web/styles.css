@@ -42,6 +42,7 @@ main {
 
 select {
   font-size: inherit;
+  outline: none;
 }
 
 #controls, #examples {

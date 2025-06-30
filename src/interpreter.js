@@ -56,7 +56,7 @@ function* evaluate({ fuel, funcMap, subroutine, stack, memory }) {
   }
 }
 
-function popStack(stack, n) {
+function pop(stack, n) {
   return n === 0 ? [] : stack.splice(-n);
 }
 
@@ -68,7 +68,7 @@ function reduce(env, operator) {
       JSON.stringify(env.stack)
     } for operator ${operator.name}.`,
   );
-  const args = popStack(env.stack, arity);
+  const args = pop(env.stack, arity);
   operator(env, ...args);
 }
 
@@ -78,6 +78,6 @@ function substitueArgs({ args, stack, subroutine }) {
       Object.assign(acc, { [arg]: stack.at(index - args.length) }),
     {},
   );
-  popStack(stack, args.length);
+  pop(stack, args.length);
   return subroutine.map((token) => transformToken[token] ?? token);
 }

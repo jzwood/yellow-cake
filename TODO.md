@@ -1,3 +1,4 @@
+- rewrite MAX example in readme to be tigher (probably use a different function)
 - finish implementing examples
 - figure out how challenges are gonna work
 - add toggle between challenges and examples
