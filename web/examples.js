@@ -214,7 +214,7 @@ todo: implement reverse subroutine
 
 P W REVERSE = your code here
 
-MAIN = 0 0 WRITE 1 1 WRITE 2 2 WRITE 3 3 WRITE 0 4 HAILSTONE
+MAIN = 0 0 WRITE 1 1 WRITE 2 2 WRITE 3 3 WRITE 0 4 REVERSE
 
 after main runs memory should be 3, 2, 1, 0
 `,
