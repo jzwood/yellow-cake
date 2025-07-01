@@ -1,9 +1,10 @@
 import {
   findBracket,
+  isPrintable,
   panic,
   toDictOn,
-} from "./utils.js?v=AC44796A-2699-41EA-BC80-E19D71F8AFC8";
-import { parseLine } from "./parser.js?v=AC44796A-2699-41EA-BC80-E19D71F8AFC8";
+} from "./utils.js?v=D59F6AE4-4D88-41AC-AF53-356FDF99D070";
+import { parseLine } from "./parser.js?v=D59F6AE4-4D88-41AC-AF53-356FDF99D070";
 
 const PLUS = ({ stack }, a, b) => stack.push(a + b);
 const MULT = ({ stack }, a, b) => stack.push(a * b);
@@ -17,8 +18,13 @@ const READ = ({ stack, memory }, p) => stack.push(memory.at(p));
 const WRITE = ({ memory }, p, x) => {
   memory[p] = x;
 };
-// PRINT REALLY SHOULD BE `P W PRINT =`
-const PRINT = ({ stack }, a) => console.info(a);
+const PRINT = ({ memory }, p, w) => {
+  const bin = memory.slice(p, p + w);
+  const output = bin.every(isPrintable)
+    ? bin.map((i) => String.fromCharCode(i)).join("")
+    : bin.join(" ");
+  console.info(output);
+};
 const LEFT_BRACKET = (env, a) => {
   if (a === 0) {
     env.pointer = findBracket(env.subroutine, {

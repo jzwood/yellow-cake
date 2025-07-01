@@ -20,6 +20,10 @@ export function isInt(str) {
   return /^\d+$/.test(str);
 }
 
+export function isPrintable(n) {
+  return n >= 32 && n <= 126;
+}
+
 export function findBracket(arr, { pointer, bracket }) {
   const step = bracket === "]" ? +1 : -1;
   let balance = 0;

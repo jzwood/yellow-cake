@@ -95,7 +95,7 @@ YC programs treat all lowercase characters as comments.
     P X WRITE =
     A   [     =
     A   ]     =
-    P   PRINT =
+    P W PRINT =
 
 #### STD LIB
 
@@ -132,5 +132,3 @@ YC programs treat all lowercase characters as comments.
     A B  DUP2     = A B A B
     P P' MEMSWAP  = (P READ) (P (P' READ) WRITE) P' WRITE
     I W  REVERSE  = I (I W +) W 1 GT [MEMSWAP (I DECR) (W 2 -) DUP2 GT]
-    P N  PRINT'   = P N [ DUP PRINT DECR ]
-    P N  WRITE'   = P N [ DUP PRINT DECR ]

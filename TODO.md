@@ -1,9 +1,7 @@
 - finish implementing examples
 - figure out how challenges are gonna work
 - add toggle between challenges and examples
-- rewrite PRINT to take a width and print the range instead of the single
-  character
-  - render as ascii if all integers are between 32 and 126 inclusive
+- come up with FUEL levels for different challenges
 
 backlog:
 

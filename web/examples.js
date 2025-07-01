@@ -4,11 +4,11 @@ export const DOUBLE_DOUBLE = {
 
 todo: implement double_double subroutine
 
-A B DOUBLE_DOUBLE = your code here
+A DOUBLE_DOUBLE = your code here
 
 MAIN = 3 DOUBLE_DOUBLE
 
-after main runs the top of the stack should be 12
+after main runs, the top of the stack should be 12
 `,
   program: `
 20 FUEL
@@ -43,17 +43,23 @@ MAIN = 321 IS_EVEN
 
 export const HELLO_WORLD = {
   instructions: `
-100 FUEL
+500 FUEL
 
 todo: implement hello_world subroutine
 
-N HELLO_WORLD = your code here
+HELLO_WORLD = your code here
 
 MAIN = HELLO_WORLD
 
 after main runs the console should have printed "hello world"
 `,
-  program: "no implemenation yet",
+  program: `
+100 FUEL
+
+HELLO_WORLD = 0 72 WRITE, 1 101 WRITE, 2 108 WRITE, 3 108 WRITE, 4 111 WRITE, 5 32 WRITE , 6 119 WRITE, 7 111 WRITE, 8 114 WRITE, 9 108 WRITE, 10 100 WRITE, 0 11 PRINT
+
+MAIN = HELLO_WORLD
+`,
 };
 
 export const MAX = {
@@ -79,7 +85,7 @@ MAIN = 8 2 MAX
 
 export const RANGE = {
   instructions: `
-100 FUEL
+500 FUEL
 
 todo: implement range subroutine
 
@@ -98,7 +104,7 @@ N RANGE = 1 N [ DUP INCR DUP N LT ]
 
 export const REPLICATE = {
   instructions: `
-100 FUEL
+1000 FUEL
 
 todo: implement replicate subroutine
 
@@ -109,7 +115,7 @@ MAIN = 2 3 REPLICATE
 after main runs the top of the stack should be 2, 2, 2
 `,
   program: `
-500 FUEL
+1000 FUEL
 
 FALSE = 0
 A N REPLICATE = N N [ A SWAP DECR DUP ] [ FALSE ]
@@ -120,7 +126,7 @@ MAIN = 3 7 REPLICATE
 
 export const FIZZBUZZ = {
   instructions: `
-100 FUEL
+10000 FUEL
 
 todo: implement fizzbuzz subroutine
 
@@ -149,7 +155,7 @@ MAIN = 22 FIZZBUZZ
 
 export const FIBONACCI = {
   instructions: `
-100 FUEL
+1000 FUEL
 
 todo: implement fibonacci subroutine
 
@@ -172,7 +178,7 @@ MAIN = 15 FIB
 
 export const POWER = {
   instructions: `
-100 FUEL
+1000 FUEL
 
 todo: implement power subroutine
 
@@ -194,9 +200,9 @@ MAIN = 9 2 POWER
 };
 export const HAILSTONE = {
   instructions: `
-100 FUEL
+1000 FUEL
 
-todo: implement hailstone subroutine
+todo: implement hailstone sequence starting with N and ending with 1
 
 N HAILSTONE = your code here
 
@@ -224,7 +230,5 @@ after main runs memory should be 3, 2, 1, 0
 /*
  * IDEAS:
  * is memory between P1 and P2 a palendrome?
- * reverse memory between P1 and P2
  * smallest value between P1 and P2
- * produce all collatz numbers starting from N
  */

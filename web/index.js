@@ -1,5 +1,5 @@
-import { run } from "../src/interpreter.js?v=90DC85C3-8C90-4EB3-8F41-5BF3F82A3C5A";
-import * as examples from "./examples.js?v=90DC85C3-8C90-4EB3-8F41-5BF3F82A3C5A";
+import { run } from "../src/interpreter.js?v=0089112E-280F-4C64-8EC3-DB51F4C0CEF6";
+import * as examples from "./examples.js?v=0089112E-280F-4C64-8EC3-DB51F4C0CEF6";
 
 function cheating() {
   const params = new URLSearchParams(location.search);
