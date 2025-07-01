@@ -4,7 +4,7 @@ export const DOUBLE_DOUBLE = {
 
 todo: implement double_double subroutine
 
-A B DOUBLE_DOUBLE = your code here
+A DOUBLE_DOUBLE = your code here
 
 MAIN = 3 DOUBLE_DOUBLE
 
