@@ -25,37 +25,34 @@ stack or written to memory (consecutive 64-bit addresses).
 #### OPERATORS
 
 YC contains built-in "primitive" operators, standard lib operators which are
-defined in terms of native operators, and user defined operators (at the moment
-std-lib operators must be included by user). Every operation decrements `FUEL`.
-Consider the following operators:
+defined in terms of native operators, and user defined operators. Every
+operation decrements `FUEL`. Consider the following operator:
 
-    A B MAX = A B GT A B IF_ELSE
+    A 6_OR_7 = A 6 EQ A 7 EQ OR
 
 Parentheses are not part of YC's grammar but if they were they would be grouped
 like this
 
-    A B MAX = ((A B GT) A B IF_ELSE)
+    A 6_OR_7 = (A 6 EQ) (A 7 EQ) OR
 
-When `MAX` is encountered on the top of the stack, the top 2 values on the stack
-are popped, evaluated by `MAX` as a subroutine, and the result is pushed on to
-the stack. The operators `GT` and `IF_ELSE` create their own nested subroutines
-(not depicted in example).
+When `6_OR_7` is encountered on the top of the stack, the top value on the stack
+is popped, evaluated by `6_OR_7` as a subroutine, and the result is pushed onto
+the stack.
 
 ```
-| MAX |       | IF_ELSE  |        | MAX |       | IF_ELSE  |       | IF_ELSE  |      | 5   |
-|-----|       |----------|        |-----|  ==>  |----------|  ==>  |----------| ==>  |-----|
-| B   |       | B        |        | 3   |       | 3        |       | 3        |      | ... |
-|-----|  ==>  |----------|        |-----|       |----------|       |----------|
-| A   |       | A        |        | 5   |       | 5        |       | 5        |
-|-----|       |----------|        |-----|       |----------|       |----------|
-| ... |       | GT       |        | ... |       | GT       |       | 0        |
-              |----------|                      |----------|       |----------|
-              | B        |                      | 3        |       | ...      |
-              |----------|                      |----------|
-              | A        |                      | 5        |
-              |----------|                      |----------|
-              | ...      |                      | ...      |
+STACK: [7]
+SUBROUTINE: 6_OR_7
+
+STACK:      [7]
+STACK:      [7, 6]
+STACK:      [0]
+STACK:      [0, 7]
+STACK:      [0, 7, 7]
+STACK:      [0, 1]
+STACK:      [1]
 ```
+
+The final final on the stack is 1 (truthy) so yes, 7 is indeed 6 or 7.
 
 #### PROGRAM
 
@@ -64,15 +61,7 @@ defined operators, and end with a zero parameter `MAIN` operator (see grammar).
 
 #### COMMENTS
 
-YC programs may only contain
-
-- integers `[0-9]`
-- capital characters `[A-Z]`
-- straight single quotes `'`
-- underscores `_`
-- equals `=`
-
-All other characters are considered comments and ignored (see grammar).
+YC programs treat all lowercase characters as comments.
 
 #### GRAMMAR
 
@@ -84,6 +73,13 @@ All other characters are considered comments and ignored (see grammar).
     <OP>      := { <PARAM> } <OPNAME> "=" <OPBODY>
     <MAIN>    := "MAIN =" <OPBODY>
     <PROGRAM> := <INTEGER> "FUEL" { <OP> } <MAIN>
+
+#### HOW TO USE CLI
+
+- make sure you have
+  [deno](https://docs.deno.com/runtime/getting_started/installation/) installed
+  - examples tested with `deno 2.0.5 (stable, release, x86_64-apple-darwin)`
+- usage: `deno run --allow-read exe.js <program.yc>`
 
 #### BUILT-INS
 
@@ -101,19 +97,10 @@ All other characters are considered comments and ignored (see grammar).
     A   ]     =
     P   PRINT =
 
-#### HOW TO RUN
-
-- make sure you have
-  [deno](https://docs.deno.com/runtime/getting_started/installation/) installed
-  - examples tested with `deno 2.0.5 (stable, release, x86_64-apple-darwin)`
-- usage: `deno run --allow-read exe.js <program.yc>`
-
-### EXAMPLES
-
 #### STD LIB
 
-        T         = 1
-        F         = 0
+    _   DROP      =
+    A   DUP       = A A
     A   DECR      = A 1 -
     A   INCR      = A 1 +
     A   DROP      =
@@ -121,28 +108,29 @@ All other characters are considered comments and ignored (see grammar).
     A B AND       = (A B NAND) (A B NAND) NAND
     A B OR        = (A A NAND) (B B NAND) NAND
     A   NOT       = A A NAND
+
+#### TESTED EXAMPLES
+
+        T         = 1
+        F         = 0
     A B NOR       = A B OR NOT
     A B REM       = A B DIV SWAP DROP
-    A   DUP       = A A
     A   NEG       = 0 A -
     P B IF        = P [ B 0 ]
     P A B IF_ELSE = P A IF P NOT B IF
     A B DIVISIBLE = A B REM 0 EQ
     A N REPLICATE = N N [ A SWAP DECR DUP ] [ F ]
+    N IS_FIZZ     = N 3 DIVISIBLE
+    N IS_BUZZ     = N 5 DIVISIBLE
+    N FIZZ_OR_BUZZ = ((N IS_FIZZ N IS_BUZZ AND) (35 NEG) IF) ((N IS_FIZZ (N IS_BUZZ NOT) AND) (3 NEG) IF) (((N IS_FIZZ NOT) N IS_BUZZ AND) (5 NEG) IF) ((N IS_FIZZ NOT N IS_BUZZ NOT AND) N IF)
+
+    N FIZZBUZZ    = 1 N [ DUP FIZZ_OR_BUZZ SWAP INCR DUP N LT ]
 
 #### UNTESTED EXAMPLES
 
-    P P' CP         = P' P READ WRITE
-    A B  DUP2       = A B A B
-    P P' MEMSWAP    = (P READ) (P (P' READ) WRITE) P' WRITE
-    I W  REVERSE    = I (I W +) W 1 GT [MEMSWAP (I DECR) (W 2 -) DUP2 GT]
-    P N  PRINT'     = P N [ DUP PRINT DECR ]
-    P N  WRITE'     = P N [ DUP PRINT DECR ]
-
-#### TESTED EXAMPLES
-
-    N IS_FIZZ      = N 3 DIVISIBLE
-    N IS_BUZZ      = N 5 DIVISIBLE
-    N FIZZ_OR_BUZZ = ((N IS_FIZZ N IS_BUZZ AND) (35 NEG) IF) ((N IS_FIZZ (N IS_BUZZ NOT) AND) (3 NEG) IF) (((N IS_FIZZ NOT) N IS_BUZZ AND) (5 NEG) IF) ((N IS_FIZZ NOT N IS_BUZZ NOT AND) N IF)
-
-    N FIZZBUZZ     = 1 N [ DUP FIZZ_OR_BUZZ SWAP INCR DUP N LT ]
+    P P' CP       = P' P READ WRITE
+    A B  DUP2     = A B A B
+    P P' MEMSWAP  = (P READ) (P (P' READ) WRITE) P' WRITE
+    I W  REVERSE  = I (I W +) W 1 GT [MEMSWAP (I DECR) (W 2 -) DUP2 GT]
+    P N  PRINT'   = P N [ DUP PRINT DECR ]
+    P N  WRITE'   = P N [ DUP PRINT DECR ]
