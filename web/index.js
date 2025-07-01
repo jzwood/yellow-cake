@@ -1,5 +1,10 @@
-import { run } from "../src/interpreter.js?v=F7D8E185-8029-4835-AA0F-EA04C2F22E98";
-import * as examples from "./examples.js?v=F7D8E185-8029-4835-AA0F-EA04C2F22E98";
+import { run } from "../src/interpreter.js?v=90DC85C3-8C90-4EB3-8F41-5BF3F82A3C5A";
+import * as examples from "./examples.js?v=90DC85C3-8C90-4EB3-8F41-5BF3F82A3C5A";
+
+function cheating() {
+  const params = new URLSearchParams(location.search);
+  return params.get("cheat") === "true";
+}
 
 function main() {
   const input = document.getElementById("input");
@@ -25,7 +30,7 @@ function main() {
       alert(`Example ${value} missing from corpus`);
     }
     const { program, instructions } = example;
-    input.value = program.trim();
+    input.value = cheating() ? program.trim() : instructions.trim();
   });
 
   load.addEventListener("click", (e) => {

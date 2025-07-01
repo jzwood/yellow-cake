@@ -1,16 +1,36 @@
-export const MAX = {
-  instructions: "",
-  program: `
+export const DOUBLE_DOUBLE = {
+  instructions: `
 100 FUEL
 
-A B MAX = A A B LT [ DROP B 0 ]
+todo: implement double_double subroutine
 
-MAIN = 8 2 MAX
+A B DOUBLE_DOUBLE = your code here
+
+MAIN = 3 DOUBLE_DOUBLE
+
+after main runs the top of the stack should be 12
+`,
+  program: `
+20 FUEL
+
+A DOUBLE_DOUBLE = A 4 *
+
+MAIN = 32 DOUBLE_DOUBLE
 `,
 };
 
 export const IS_EVEN = {
-  instructions: "",
+  instructions: `
+100 FUEL
+
+todo: implement is_even subroutine
+
+A IS_EVEN = your code here
+
+MAIN = 5 IS_EVEN
+
+after main runs the top of the stack should be 0
+`,
   program: `
 100 FUEL
 
@@ -21,8 +41,54 @@ MAIN = 321 IS_EVEN
 `,
 };
 
+export const HELLO_WORLD = {
+  instructions: `
+100 FUEL
+
+todo: implement hello_world subroutine
+
+N HELLO_WORLD = your code here
+
+MAIN = HELLO_WORLD
+
+after main runs the console should have printed "hello world"
+`,
+  program: "no implemenation yet",
+};
+
+export const MAX = {
+  instructions: `
+100 FUEL
+
+todo: implement max subroutine
+
+A B MAX = your code here
+
+MAIN = 8 2 MAX
+
+after main runs the top of the stack should be 8
+`,
+  program: `
+100 FUEL
+
+A B MAX = A A B LT [ DROP B 0 ]
+
+MAIN = 8 2 MAX
+`,
+};
+
 export const RANGE = {
-  instructions: "",
+  instructions: `
+100 FUEL
+
+todo: implement range subroutine
+
+A RANGE = your code here
+
+MAIN = 6 RANGE
+
+after main runs the top of the stack should be 1, 2, 3, 4, 5, 6
+`,
   program: `
 100 FUEL
 
@@ -31,7 +97,17 @@ N RANGE = 1 N [ DUP INCR DUP N LT ]
 };
 
 export const REPLICATE = {
-  instructions: "",
+  instructions: `
+100 FUEL
+
+todo: implement replicate subroutine
+
+A REPLICATE = your code here
+
+MAIN = 2 3 REPLICATE
+
+after main runs the top of the stack should be 2, 2, 2
+`,
   program: `
 500 FUEL
 
@@ -43,7 +119,17 @@ MAIN = 3 7 REPLICATE
 };
 
 export const FIZZBUZZ = {
-  instructions: "",
+  instructions: `
+100 FUEL
+
+todo: implement fizzbuzz subroutine
+
+N FIZZ_OR_BUZZ = your code here
+
+MAIN = 7 FIZZ_OR_BUZZ
+
+after main runs the top of the stack should be 1, 2, -3, 4, -5, -3, 7
+`,
   program: `
 4877 FUEL
 
@@ -62,7 +148,17 @@ MAIN = 22 FIZZBUZZ
 };
 
 export const FIBONACCI = {
-  instructions: "",
+  instructions: `
+100 FUEL
+
+todo: implement fibonacci subroutine
+
+N FIBONACCI = your code here
+
+MAIN = 5 FIZZBUZZ
+
+after main runs the top of the stack should be 1, 1, 2, 3, 5, 8, 13
+`,
   program: `
 1000 FUEL
 
@@ -74,22 +170,18 @@ MAIN = 15 FIB
 `,
 };
 
-export const DOUBLE_DOUBLE = {
-  instructions: "",
-  program: `
-20 FUEL
-
-A DOUBLE_DOUBLE = A 4 *
-
-MAIN = 32 DOUBLE_DOUBLE
-`,
-};
-export const HELLO_WORLD = {
-  instructions: "",
-  program: "no implemenation yet",
-};
 export const POWER = {
-  instructions: "",
+  instructions: `
+100 FUEL
+
+todo: implement power subroutine
+
+B E POWER = your code here
+
+MAIN = 7 2 POWER
+
+after main runs the top of the stack should be 49
+`,
   program: `
 100 FUEL
 
@@ -100,8 +192,34 @@ _ X _ CLEAN = X
 MAIN = 9 2 POWER
 `,
 };
-export const HAILSTONE = { instructions: "", program: "no implemenation yet" };
-export const REVERSE = { instructions: "", program: "no implemenation yet" };
+export const HAILSTONE = {
+  instructions: `
+100 FUEL
+
+todo: implement hailstone subroutine
+
+N HAILSTONE = your code here
+
+MAIN = 3 HAILSTONE
+
+after main runs the top of the stack should be 3, 5, 1
+`,
+  program: "no implemenation yet",
+};
+export const REVERSE = {
+  instructions: `
+100 FUEL
+
+todo: implement reverse subroutine
+
+P W REVERSE = your code here
+
+MAIN = 0 0 WRITE 1 1 WRITE 2 2 WRITE 3 3 WRITE 0 4 HAILSTONE
+
+after main runs memory should be 3, 2, 1, 0
+`,
+  program: "no implemenation yet",
+};
 
 /*
  * IDEAS:

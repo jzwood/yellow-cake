@@ -2,8 +2,8 @@ import {
   findBracket,
   panic,
   toDictOn,
-} from "./utils.js?v=29B4AF4F-2C1D-4AB8-8DE3-DDDD845E8433";
-import { parseLine } from "./parser.js?v=29B4AF4F-2C1D-4AB8-8DE3-DDDD845E8433";
+} from "./utils.js?v=AC44796A-2699-41EA-BC80-E19D71F8AFC8";
+import { parseLine } from "./parser.js?v=AC44796A-2699-41EA-BC80-E19D71F8AFC8";
 
 const PLUS = ({ stack }, a, b) => stack.push(a + b);
 const MULT = ({ stack }, a, b) => stack.push(a * b);
