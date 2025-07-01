@@ -7,6 +7,8 @@ function cheating() {
 }
 
 function main() {
+  console.log('VERSION=22C8A449-84A7-436B-AFE6-BCA16A2C62A8')
+
   const input = document.getElementById("input");
   const output = document.getElementById("output");
   const load = document.getElementById("load");
