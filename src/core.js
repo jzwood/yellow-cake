@@ -3,8 +3,8 @@ import {
   isPrintable,
   panic,
   toDictOn,
-} from "./utils.js?v=A43FA79B-FEFC-4BB7-926B-A4C0112AC21C";
-import { parseLine } from "./parser.js?v=A43FA79B-FEFC-4BB7-926B-A4C0112AC21C";
+} from "./utils.js?v=7D60158D-54D9-4CE8-AB10-AB7202B0E9D1";
+import { parseLine } from "./parser.js?v=7D60158D-54D9-4CE8-AB10-AB7202B0E9D1";
 
 const PLUS = ({ stack }, a, b) => stack.push(a + b);
 const MULT = ({ stack }, a, b) => stack.push(a * b);
@@ -14,7 +14,7 @@ const GT = ({ stack }, a, b) => stack.push(+(a > b));
 const LT = ({ stack }, a, b) => stack.push(+(a < b));
 const EQ = ({ stack }, a, b) => stack.push(+(a === b));
 const NAND = ({ stack }, a, b) => stack.push(+!(!!a && !!b));
-const READ = ({ stack, memory }, p) => stack.push(memory.at(p));
+const READ = ({ stack, memory }, p) => stack.push(memory.at(p) ?? 0);
 const WRITE = ({ memory }, p, x) => {
   memory[p] = x;
 };

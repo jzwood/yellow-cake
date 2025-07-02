@@ -1,4 +1,4 @@
-import { run } from "./src/interpreter.js?v=568DBC07-2749-47CF-8BD3-8AB10B3385C0";
+import { run } from "./src/interpreter.js?v=6AAD7C37-4DF8-408F-97B5-DD1C822C45E9";
 
 const USAGE = "USAGE: deno run --allow-read exe.js <program.yc>";
 

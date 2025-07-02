@@ -116,7 +116,10 @@ YC programs treat all lowercase characters as comments.
     A B NOR       = A B OR NOT
     A B REM       = A B DIV SWAP DROP
     A   NEG       = 0 A -
+    A B  DUP2     = A B A B
     P B IF        = P [ B 0 ]
+    P P' CP       = P' P READ WRITE
+    P P' CP_SWAP  = P' (P READ) P (P' READ) WRITE WRITE
     P A B IF_ELSE = P A IF P NOT B IF
     A B DIVISIBLE = A B REM 0 EQ
     A N REPLICATE = N N [ A SWAP DECR DUP ] [ F ]
@@ -128,7 +131,4 @@ YC programs treat all lowercase characters as comments.
 
 #### UNTESTED EXAMPLES
 
-    P P' CP       = P' P READ WRITE
-    A B  DUP2     = A B A B
-    P P' MEMSWAP  = (P READ) (P (P' READ) WRITE) P' WRITE
     I W  REVERSE  = I (I W +) W 1 GT [MEMSWAP (I DECR) (W 2 -) DUP2 GT]

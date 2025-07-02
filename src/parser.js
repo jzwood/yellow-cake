@@ -6,10 +6,12 @@ import {
   isInt,
   panic,
   toDictOn,
-} from "./utils.js?v=238A4F96-31BA-487C-9750-04620108E86E";
+} from "./utils.js?v=AB074943-3229-40CB-9ED7-AEBCF60740CB";
 
 export function parseLine(line) {
-  const tokens = line.matchAll(/[A-Z0-9_*+=\-\[\]\']+/g).map(([name]) => name)
+  const tokens = line.matchAll(/[A-Z0-9_\']+|[*+=\-\[\]]/g).map(([name]) =>
+    name
+  )
     .toArray();
   const eq = tokens.indexOf("=");
   const name = tokens.at(eq - 1);

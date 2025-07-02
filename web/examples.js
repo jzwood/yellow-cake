@@ -96,7 +96,7 @@ MAIN = 6 RANGE
 after main runs the top of the stack should be 1, 2, 3, 4, 5, 6
 `,
   program: `
-100 FUEL
+500 FUEL
 
 N RANGE = 1 N [ DUP INCR DUP N LT ]
 
@@ -222,7 +222,8 @@ todo: implement reverse subroutine
 
 P W REVERSE = your code here
 
-MAIN = 0 0 WRITE 1 1 WRITE 2 2 WRITE 3 3 WRITE 0 4 REVERSE
+SETUP = 0 0 WRITE 1 1 WRITE 2 2 WRITE 3 3 WRITE
+MAIN = SETUP 0 4 REVERSE
 
 after main runs memory should be 3, 2, 1, 0
 `,
