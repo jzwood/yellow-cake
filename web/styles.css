@@ -24,12 +24,12 @@ table {
   font-size: larger;
 }
 
-th, td {
-  text-align: right;
+th:nth-child(even), td:nth-child(even) {
+  text-align: left;
 }
 
-th:last-child, td:last-child {
-  text-align: left;
+th:nth-child(odd), td:nth-child(odd) {
+  text-align: right;
 }
 
 #input, #output, #examples, #scoreboard, button, select, option, dialog {
