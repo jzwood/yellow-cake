@@ -9,7 +9,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link
       rel="stylesheet"
-      href="styles.css?v=FD05A655-6C0C-4438-91D3-89D5D48E441E"
+      href="styles.css?v=0C8F87D6-90D3-438C-A2CD-AB6A0F18F09C"
     />
 
     <!-- HTML Meta Tags -->
@@ -45,10 +45,25 @@
   </head>
   <body>
     <main>
-      <section id="scoreboard">
+      <div id="scoreboard">
         <div id="controls">
           <a href="./playground.html">YELLOW CAKE PLAYGROUND</a>
           <span class="spacer"></span>
+          <button
+            id="about"
+            onclick="document.getElementById('about-modal').showModal()"
+          >
+            SUBMIT HIGH SCORE
+          </button>
+          <dialog id="about-modal">
+            <p>Send challenge solutions to JAKE WOOD for verification.</p>
+            <button
+              autofocus
+              onclick="document.getElementById('about-modal').close()"
+            >
+              Ok
+            </button>
+          </dialog>
           <a
             id="github"
             href="https://github.com/jzwood/yellow-cake"
@@ -77,8 +92,8 @@
           </tr>
           <tr>
             <td>HELLO_WORLD</td>
-            <td>--</td>
-            <td>--</td>
+            <td>ALEX</td>
+            <td>37</td>
             <td></td>
           </tr>
           <tr>
@@ -130,7 +145,7 @@
             <td>0 5</td>
           </tr>
         </table>
-      </section>
+      </div>
     </main>
   </body>
 </html>

@@ -1,5 +1,5 @@
-import { run } from "../src/interpreter.js?v=C0AB405C-721F-4856-B1BC-5C84EDAE125D";
-import * as examples from "./examples.js?v=C0AB405C-721F-4856-B1BC-5C84EDAE125D";
+import { run } from "../src/interpreter.js?v=ABD7A620-B913-4E4F-8D90-7536FDEEAADF";
+import * as examples from "./examples.js?v=ABD7A620-B913-4E4F-8D90-7536FDEEAADF";
 
 function cheating() {
   const params = new URLSearchParams(location.search);
@@ -7,7 +7,7 @@ function cheating() {
 }
 
 function main() {
-  console.log("VERSION=C0AB405C-721F-4856-B1BC-5C84EDAE125D");
+  console.log("VERSION ABD7A620-B913-4E4F-8D90-7536FDEEAADF");
 
   const input = document.getElementById("input");
   const output = document.getElementById("output");
