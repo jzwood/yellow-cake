@@ -13,7 +13,26 @@ main {
   min-height: 100vh;
 }
 
-#input, #output, button, select, option, dialog {
+h1 {
+  text-align: center;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 1rem 0.25rem;
+  font-size: larger;
+}
+
+th, td {
+  text-align: right;
+}
+
+th:last-child, td:last-child {
+  text-align: left;
+}
+
+#input, #output, #examples, #scoreboard, button, select, option, dialog {
   font-family: "Departure", Courier, monospace;
 }
 
@@ -26,7 +45,7 @@ main {
   resize: horizontal;
 }
 
-#output {
+#output, #scoreboard {
   position: relative;
   flex-grow: 1;
   overflow-x: hidden;
@@ -52,6 +71,7 @@ select {
   display: flex;
   column-gap: 0.5rem;
   width: calc(100% - 1rem);
+  align-items: center;
 
   .spacer {
     flex-grow: 1;
