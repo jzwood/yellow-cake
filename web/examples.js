@@ -8,7 +8,7 @@ A DOUBLE_DOUBLE = your code here
 
 MAIN = 3 DOUBLE_DOUBLE
 
-after main runs, the top of the stack should be 12
+after main runs the stack should be [12]
 `,
   program: `
 20 FUEL
@@ -29,7 +29,7 @@ A IS_EVEN = your code here
 
 MAIN = 5 IS_EVEN
 
-after main runs the top of the stack should be 0
+after main runs the stack should be [0]
 `,
   program: `
 100 FUEL
@@ -72,7 +72,7 @@ A B MAX = your code here
 
 MAIN = 8 2 MAX
 
-after main runs the top of the stack should be 8
+after main runs the stack should be [8]
 `,
   program: `
 100 FUEL
@@ -93,7 +93,7 @@ A RANGE = your code here
 
 MAIN = 6 RANGE
 
-after main runs the top of the stack should be 1, 2, 3, 4, 5, 6
+after main runs the stack should be [1, 2, 3, 4, 5, 6]
 `,
   program: `
 500 FUEL
@@ -114,7 +114,7 @@ A REPLICATE = your code here
 
 MAIN = 2 3 REPLICATE
 
-after main runs the top of the stack should be 2, 2, 2
+after main runs the stack should be [2, 2, 2]
 `,
   program: `
 1000 FUEL
@@ -136,7 +136,7 @@ N FIZZBUZZ = your code here
 
 MAIN = 7 FIZZBUZZ
 
-after main runs the top of the stack should be 1, 2, -3, 4, -5, -3, 7
+after main runs the stack should be [1, 2, -3, 4, -5, -3, 7]
 `,
   program: `
 4877 FUEL
@@ -165,7 +165,7 @@ N FIBONACCI = your code here
 
 MAIN = 5 FIBONACCI
 
-after main runs the top of the stack should be 1, 1, 2, 3, 5, 8, 13
+after main runs the stack should be [1, 1, 2, 3, 5, 8, 13]
 `,
   program: `
 1000 FUEL
@@ -188,7 +188,7 @@ B E POWER = your code here
 
 MAIN = 7 2 POWER
 
-after main runs the top of the stack should be 49
+after main runs the stack should be [49]
 `,
   program: `
 100 FUEL
@@ -210,7 +210,7 @@ N HAILSTONE = your code here
 
 MAIN = 3 HAILSTONE
 
-after main runs the top of the stack should be 3, 5, 1
+after main runs the stack should be [3, 5, 1]
 `,
   program: "no implemenation yet",
 };
@@ -222,12 +222,23 @@ todo: implement reverse subroutine
 
 P W REVERSE = your code here
 
-SETUP = 0 0 WRITE 1 1 WRITE 2 2 WRITE 3 3 WRITE
-MAIN = SETUP 0 4 REVERSE
+SETUP = 2 77 WRITE 3 78 WRITE 4 79 WRITE 5 80 WRITE
+MAIN = SETUP 2 4 REVERSE
 
-after main runs memory should be 3, 2, 1, 0
+after main runs memory should be [,,80, 78, 79, 77]
 `,
-  program: "no implemenation yet",
+  program: `
+100 FUEL
+
+P P' CP_SWAP  = P' (P READ) P (P' READ) WRITE WRITE
+A B  DUP2 = A B A B
+A B  CONSTRICT = A INCR B DECR
+
+I W REVERSE = I (I W + DECR) W [ DUP2 CP_SWAP CONSTRICT DUP2 EQ ]
+
+SETUP = 4 99 WRITE 5 101 WRITE 6 102 WRITE 7 103 WRITE
+MAIN = SETUP 4 4 REVERSE
+`,
 };
 
 /*
