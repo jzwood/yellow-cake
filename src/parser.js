@@ -9,15 +9,15 @@ import {
 } from "./utils.js?v=C15B8DAD-1454-4CF9-AA2C-48781DCC4293";
 
 export function parseLine(line) {
-  const tokens = line.matchAll(/[A-Z0-9_\']+|[*+=\-\[\]]/g).map(([name]) =>
-    name
-  )
+  const tokens = line
+    .matchAll(/[A-Z0-9_\']+|[*+=\-\[\]]/g)
+    .map(([name]) => name)
     .toArray();
   const eq = tokens.indexOf("=");
   const name = tokens.at(eq - 1);
   const args = tokens.slice(0, eq - 1);
   const subroutine = tokens.slice(eq + 1).map((token) =>
-    /^\d+$/.test(token) ? parseInt(token) : token
+    isInt(token) ? parseInt(token, 10) : token
   );
   return { args, name, subroutine };
 }
