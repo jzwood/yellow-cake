@@ -3,8 +3,8 @@ import {
   isPrintable,
   panic,
   toDictOn,
-} from "./utils.js?v=C7539AE4-3E42-44BD-BDD0-61C8C92862AB";
-import { parseLine } from "./parser.js?v=C7539AE4-3E42-44BD-BDD0-61C8C92862AB";
+} from "./utils.js?v=5F1208C9-AA43-4EE3-87B8-00DC8097B69D";
+import { parseLine } from "./parser.js?v=5F1208C9-AA43-4EE3-87B8-00DC8097B69D";
 
 const PLUS = ({ stack }, a, b) => stack.push(a + b);
 const MULT = ({ stack }, a, b) => stack.push(a * b);
