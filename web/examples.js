@@ -208,9 +208,9 @@ todo: implement hailstone sequence starting with N and ending with 1
 
 N HAILSTONE = your code here
 
-MAIN = 3 HAILSTONE
+MAIN = 9 HAILSTONE
 
-after main runs the stack should be [3, 5, 1]
+after main runs the stack should be [9, 28, 14, 7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
 `,
   program: "no implemenation yet",
 };
