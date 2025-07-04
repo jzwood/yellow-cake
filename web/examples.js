@@ -134,9 +134,9 @@ todo: implement fizzbuzz subroutine
 
 N FIZZBUZZ = your code here
 
-MAIN = 7 FIZZBUZZ
+MAIN = 20 FIZZBUZZ
 
-after main runs the stack should be [1, 2, -3, 4, -5, -3, 7]
+after main runs the stack should be [1,2,-3,4,-5,-3,7,8,-3,-5,11,-3,13,14,-35,16,17,-3,19,-5]
 `,
   program: `
 4877 FUEL
@@ -216,16 +216,16 @@ after main runs the stack should be [9, 28, 14, 7, 22, 11, 34, 17, 52, 26, 13, 4
 };
 export const REVERSE = {
   instructions: `
-100 FUEL
+500 FUEL
 
 todo: implement reverse subroutine
 
 P W REVERSE = your code here
 
-SETUP = 2 77 WRITE 3 78 WRITE 4 79 WRITE 5 80 WRITE
-MAIN = SETUP 2 4 REVERSE
+SETUP = 2 77 WRITE 3 78 WRITE 4 79 WRITE 5 80 WRITE 6 81 WRITE
+MAIN = SETUP 2 5 REVERSE
 
-after main runs memory should be [,,80, 79, 78, 77]
+after main runs memory should be [,,81, 80, 79, 78, 77]
 `,
   program: `
 100 FUEL
