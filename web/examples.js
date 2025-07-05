@@ -220,7 +220,7 @@ export const REVERSE = {
 
 todo: implement reverse subroutine
 
-P W REVERSE = your code here
+P L REVERSE = your code here, p is starting pointer and l is length of string
 
 SETUP = 2 77 WRITE 3 78 WRITE 4 79 WRITE 5 80 WRITE 6 81 WRITE
 MAIN = SETUP 2 5 REVERSE
@@ -245,4 +245,5 @@ MAIN = SETUP 4 4 REVERSE
  * IDEAS:
  * is memory between P1 and P2 a palendrome?
  * smallest value between P1 and P2
+ * quicksort
  */

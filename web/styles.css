@@ -10,6 +10,7 @@ html, body {
 
 main {
   display: flex;
+  flex-wrap: wrap;
   min-height: 100vh;
 }
 
@@ -24,12 +25,24 @@ table {
   font-size: larger;
 }
 
+@media (width <= 500px) {
+  table {
+    font-size: medium;
+  }
+}
+
 th:nth-child(even), td:nth-child(even) {
   text-align: left;
 }
 
 th:nth-child(odd), td:nth-child(odd) {
   text-align: right;
+}
+
+.panel {
+  display: flex;
+  position: relative;
+  overflow: auto;
 }
 
 #input, #output, #examples, #scoreboard, button, select, option, dialog {

@@ -9,7 +9,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link
       rel="stylesheet"
-      href="styles.css?v=27BC92AA-284B-40A9-B43F-5DD4110419DD"
+      href="styles.css?v=0AB5C2E1-DC2B-4E3F-9E8D-06C92D34B3C8"
     />
 
     <!-- HTML Meta Tags -->
@@ -45,29 +45,32 @@
   </head>
   <body>
     <main>
-      <div id="examples">
-        <select id="challenges" name="">
-          <option value="">⬤ CHALLENGES</option>
-          <option value="DOUBLE_DOUBLE">🟢 DOUBLE_DOUBLE</option>
-          <option value="IS_EVEN">🟢 IS_EVEN</option>
-          <option value="HELLO_WORLD">🟢 HELLO_WORLD</option>
-          <option value="MAX">🟢 MAX</option>
-          <option value="REPLICATE">🟡 REPLICATE</option>
-          <option value="RANGE">🟡 RANGE</option>
-          <option value="POWER">🟠 POWER</option>
-          <option value="FIBONACCI">🟠 FIBONACCI</option>
-          <option value="HAILSTONE">🔴 HAILSTONE</option>
-          <option value="FIZZBUZZ">🔴 FIZZBUZZ</option>
-          <option value="REVERSE">🔴 REVERSE</option>
-        </select>
-        <a href="./scoreboard.html">SCOREBOARD</a>
+      <div class="panel">
+        <div id="examples">
+          <select id="challenges" name="">
+            <option value="">⬤ CHALLENGES</option>
+            <option value="DOUBLE_DOUBLE">🟢 DOUBLE_DOUBLE</option>
+            <option value="IS_EVEN">🟢 IS_EVEN</option>
+            <option value="HELLO_WORLD">🟢 HELLO_WORLD</option>
+            <option value="MAX">🟢 MAX</option>
+            <option value="REPLICATE">🟡 REPLICATE</option>
+            <option value="RANGE">🟡 RANGE</option>
+            <option value="POWER">🟠 POWER</option>
+            <option value="FIBONACCI">🟠 FIBONACCI</option>
+            <option value="HAILSTONE">🔴 HAILSTONE</option>
+            <option value="FIZZBUZZ">🔴 FIZZBUZZ</option>
+            <option value="REVERSE">🔴 REVERSE</option>
+          </select>
+          <a href="./scoreboard.html">SCOREBOARD</a>
+        </div>
+        <textarea
+          id="input"
+          cols="40"
+          spellcheck="false"
+        ></textarea>
       </div>
-      <textarea
-        id="input"
-        cols="40"
-        spellcheck="false"
-      ></textarea>
       <pre
+        class="panel"
         id="output"
       >
         <div id="controls">
@@ -151,7 +154,7 @@ A   NOT   = A A NAND
     </dialog>
     <script
       type="module"
-      src="index.js?v=27BC92AA-284B-40A9-B43F-5DD4110419DD"
+      src="index.js?v=0AB5C2E1-DC2B-4E3F-9E8D-06C92D34B3C8"
     ></script>
   </body>
 </html>
