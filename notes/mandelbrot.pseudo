@@ -1,0 +1,15 @@
+
+public int testPoint(double real, double imaginary){
+int escapeNumber = 0;
+double zr = 0; double zi = 0;
+double r, i;
+while (escapeNumber < MAXITER){
+escapeNumber++;
+r = zr; i = zi;
+if ((r*r + i*i) < ESCAPEBOUNDRY){
+zr = r*r - i*i + real;
+zi = 2*r*i + imaginary;
+}else
+return escapeNumber;//point outside set
+}return 0;//point inside set
+}

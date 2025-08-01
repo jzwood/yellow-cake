@@ -36,9 +36,13 @@ function main() {
   });
 
   load.addEventListener("click", (e) => {
-    program = run({ program: input.value, hook: hook() });
-    const { done, value } = program.next();
-    writeOut(value);
+    try {
+      program = run({ program: input.value, hook: hook() });
+      const { done, value } = program.next();
+      writeOut(value);
+    } catch (err) {
+      alert(err);
+    }
   });
 
   evaluate.addEventListener("click", (e) => {
