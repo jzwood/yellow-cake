@@ -8,7 +8,7 @@ async function main() {
     rest.length !== 0 || typeof filepath !== "string" ||
     !filepath.endsWith(".yc")
   ) {
-    return Promise.reject({});
+    return Promise.reject("invalid filepath");
   }
 
   const program = await Deno.readTextFile(filepath);
