@@ -8,14 +8,16 @@ async function main() {
     rest.length !== 0 || typeof filepath !== "string" ||
     !filepath.endsWith(".yc")
   ) {
-    console.info(USAGE);
-    return null;
+    return Promise.reject({});
   }
 
   const program = await Deno.readTextFile(filepath);
   return run({ program }).reduce((_, env) => env);
 }
 
-const { stack, memory, fuel } = await main();
-console.log(stack);
-console.warn({ fuel });
+main().then(({ stack, memory, fuel }) => {
+  console.log(stack);
+  console.warn({ fuel });
+}).catch(() => {
+  console.info(USAGE);
+});
