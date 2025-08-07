@@ -16,8 +16,8 @@ async function main() {
 }
 
 main().then(({ stack, memory, fuel }) => {
-  console.log(stack);
+  console.warn(stack);
   console.warn({ fuel });
 }).catch(() => {
-  console.info(USAGE);
+  console.error(USAGE);
 });
