@@ -8,7 +8,7 @@ async function main() {
     rest.length !== 0 || typeof filepath !== "string" ||
     !filepath.endsWith(".yc")
   ) {
-    return Promise.reject("invalid filepath");
+    return Promise.reject(USAGE);
   }
 
   const program = await Deno.readTextFile(filepath);
@@ -18,6 +18,6 @@ async function main() {
 main().then(({ stack, memory, fuel }) => {
   console.warn(stack);
   console.warn({ fuel });
-}).catch(() => {
-  console.error(USAGE);
+}).catch((err) => {
+  console.error(err);
 });
