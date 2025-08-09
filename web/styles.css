@@ -129,3 +129,15 @@ summary {
   cursor: pointer;
   font-size: x-large;
 }
+
+.progression {
+  padding: 2rem;
+
+  h4 {
+    margin: 0;
+  }
+
+  li {
+    white-space: pre;
+  }
+}
