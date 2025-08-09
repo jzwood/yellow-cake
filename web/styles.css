@@ -51,8 +51,11 @@ th:nth-child(odd), td:nth-child(odd) {
   font-family: "Departure", Courier, monospace;
 }
 
-button.secret-button {
+button.secret-button:not(:hover) {
   background-color: transparent;
+}
+
+button.secret-button {
   border: none;
   font-size: 1.2rem;
   margin: 0;
