@@ -51,6 +51,19 @@ th:nth-child(odd), td:nth-child(odd) {
   font-family: "Departure", Courier, monospace;
 }
 
+button.secret-button:not(:hover) {
+  background-color: transparent;
+}
+
+button.secret-button {
+  border: none;
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  cursor: pointer;
+}
+
 #examples {
   background-color: rgba(255, 255, 255, 0.9);
 }
@@ -118,4 +131,16 @@ details {
 summary {
   cursor: pointer;
   font-size: x-large;
+}
+
+.progression {
+  padding: 2rem;
+
+  h4 {
+    margin: 0;
+  }
+
+  li {
+    white-space: pre;
+  }
 }

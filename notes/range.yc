@@ -1,0 +1,7 @@
+148 FUEL
+
+N M INNER = 99 N (N 1 +) (N 2 +) (N 3 +) (N 4 +) (N 5 +) M LT
+N AFTER = DROP DROP
+A RANGE = 1 A [ A INNER ] A AFTER
+
+MAIN = 19 RANGE
