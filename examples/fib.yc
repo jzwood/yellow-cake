@@ -1,0 +1,7 @@
+1000 FUEL
+
+N1 N2 C NEXT = N1 N2 (N1 N2 +) (C 1 -) C
+
+N FIB = 1 1 (N 1 -) N [ NEXT ] DROP
+
+MAIN = 7 FIB

@@ -1,7 +1,5 @@
 400 FUEL
 
-A DROP =
-A B P IF_ELSE = 1 P [ DROP A 0 0 ] [ B 0 ]
-A B MAX = A B A B GT IF_ELSE
+A B MAX = A A B LT [ B DROP 0 ]
 
-MAIN = 24 13 MAX
+MAIN = 1 9 MAX

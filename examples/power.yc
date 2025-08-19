@@ -1,0 +1,6 @@
+1000 FUEL
+
+B1 E B2 POW = B1 B2 * (E 1 -) DUP
+B E POWER = B (E 1 -) DUP [ B POW ] DROP
+
+MAIN = 5 3 POWER
