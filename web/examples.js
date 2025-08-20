@@ -212,7 +212,14 @@ MAIN = 9 HAILSTONE
 
 after main runs the stack should be [9, 28, 14, 7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
 `,
-  program: "no implemenation yet",
+  program: `
+1000 FUEL
+
+N NEXT = N N 2 DIV [ DROP N 3 * 1 + 0 ] DUP 1 GT
+N HAILSTONE = N N [ NEXT ]
+
+MAIN = 9 HAILSTONE
+`,
 };
 export const REVERSE = {
   instructions: `
