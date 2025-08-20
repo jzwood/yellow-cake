@@ -29,3 +29,21 @@ Y X COUNTER X2 X_STEP INNER_LOOP = (COUNTER (X Y IS_MEMBER WRITE) Y (X X_STEP +)
 Y X COUNTER Y2 Y_STEP POST_LOOP = 0 COUNTER PRINT (Y Y_STEP +) (Y Y2 LT)
 
 MAIN = (2 NEG) 1 200 (1 NEG) 1 70 MANDELBROT
+
+
+0.5 + 0.5 = 1
+scale factor 100
+
+50 + 50 = 100
+correct answer b/c 1 * 100 = 100
+
+0.5 * 0.5 = 0.25
+scale factor 100
+
+50 * 50 = 2500
+answer should be 25 b/c 0.25 * 100 = 25
+
+when you're performing * with fixed point numbers you have to divide result by scale factor
+
+(50 * 50) / 1000 = 25
+correct answer
