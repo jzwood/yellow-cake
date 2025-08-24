@@ -52,6 +52,7 @@ function* evaluate({ fuel, funcMap, subroutine, stack, memory }) {
     }
     env.pointer++;
     panic(++env.fuel.used > env.fuel.max, `All ${env.fuel.max} FUEL exhausted`);
+    console.log(stack.join(' '), ',' , subroutine.slice(env.pointer).join(' '))
     yield env;
   }
 }

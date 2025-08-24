@@ -1,0 +1,48 @@
+A B N NEXT = A B (A B +) (N DECR) DUP
+
+N FIB = 1 1 N N [ NEXT ] DROP
+
+MAIN = 15 FIB
+
+
+1
+2 3 1     1
+2 3 1
+2 3 2     3
+3 2 (2,3)
+
+
+
+
+MAIN = 15 FIB
+       N  FIB = 1 1 N N [ NEXT ]                                  DROP
+                A B N     NEXT = A B A B + N DECR       DUP
+                                             DECR = 1 -
+                                                    A   DUP = A A
+                                                                A DROP =
+
+
+
+
+
+MAIN = 15 FIB
+       |__|
+
+N FIB = 1 1 N N [ NEXT ] DROP
+        | | | |_| |
+        |_|_|_____|
+
+A B N NEXT = A B (A B +) (N DECR) DUP
+                  |_|_|   |_|     |
+                  |_______|_______|
+
+MAIN = 15 FIB
+       ╰──╯
+
+N FIB = 1 1 N N [ NEXT ] DROP
+        │ │ │ ╰─╯ │
+        ╰─┴─┴─────╯
+
+A B N NEXT = A B (A B +) (N DECR) DUP
+                  ├─┴─╯   ╰─╯     │
+                  ╰───────────────╯

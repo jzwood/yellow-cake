@@ -1,5 +1,20 @@
 400 FUEL
 
-A B MAX = A A B LT [ B DROP 0 ]
+A B MAX = A A B LT [ DROP B 0 ]
 
-MAIN = 1 9 MAX
+MAIN = 11 9 MAX
+
+
+
+A   B
+A A B
+A     C
+A   B C
+
+
+|  |
+|\ |\
+| \| |
+|  * |
+*
+
